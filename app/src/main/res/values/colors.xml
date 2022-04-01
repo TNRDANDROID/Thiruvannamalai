@@ -22,6 +22,13 @@
     <color name="yellow">#F5F504</color>
     <color name="red">#B71C1C</color>
 
+    <color name="d_grey">#E7E7EB</color>
+    <color name="d_grey1">#8F91A2</color>
+    <color name="d_grey2">#747474</color>
+    <color name="d_grey3">#746C7C</color>
+    <color name="d_grey4">#B8B8BA</color>
+    <color name="full_transparent">#00FF0000</color>
+    <color name="primary_text_color">#2A4AFB</color>
 
     <color name="blue_background">#242b35</color>
     <color name="border_line">#252b34</color>

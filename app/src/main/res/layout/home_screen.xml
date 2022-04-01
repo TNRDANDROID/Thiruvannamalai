@@ -5,7 +5,7 @@
 
         <variable
             name="activity"
-            type="com.nic.PMAYSurvey.activity.HomePage" />
+            type="com.nic.nutrigarden.activity.HomePage" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

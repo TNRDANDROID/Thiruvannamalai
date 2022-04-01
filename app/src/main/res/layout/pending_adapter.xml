@@ -5,7 +5,7 @@
 
         <variable
             name="adapter"
-            type="com.nic.PMAYSurvey.adapter.PendingAdapter" />
+            type="com.nic.nutrigarden.adapter.PendingAdapter" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

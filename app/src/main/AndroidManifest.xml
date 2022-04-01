@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nic.PMAYSurvey">
+    package="com.nic.nutrigarden">
 
     <supports-screens
         android:anyDensity="true"
@@ -29,21 +29,26 @@
     <uses-permission android:name="android.permission.FLAG_GRANT_READ_URI_PERMISSION" />
 
     <application
-        android:name="com.nic.PMAYSurvey.application.NICApplication"
+        android:name=".application.NICApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_app_logo"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:usesCleartextTraffic="true"
         android:resizeableActivity="true"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@drawable/ic_app_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activity.ViewNutriGarden"></activity>
+        <activity android:name=".activity.NewPendingScreen" />
+        <activity android:name=".activity.NewHomePage" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
-        <activity android:name="com.nic.PMAYSurvey.activity.SplashScreen">
+
+        <activity android:name=".activity.SplashScreen">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -53,68 +58,61 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
-            android:name="com.nic.PMAYSurvey.activity.LoginScreen"
+            android:name=".activity.LoginScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-
         <activity
-            android:name="com.nic.PMAYSurvey.activity.HomePage"
+            android:name=".activity.HomePage"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-
         <activity
-            android:name="com.nic.PMAYSurvey.activity.CameraScreen"
+            android:name=".activity.CameraScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-
         <activity
-            android:name="com.nic.PMAYSurvey.activity.FullImageActivity"
+            android:name=".activity.FullImageActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-
         <activity
-            android:name="com.nic.PMAYSurvey.activity.AppUpdateDialog"
+            android:name=".activity.AppUpdateDialog"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-
         <activity
-            android:name="com.nic.PMAYSurvey.activity.PendingScreen"
+            android:name=".activity.PendingScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-
         <activity
-            android:name="com.nic.PMAYSurvey.activity.TakePhotoScreen"
+            android:name=".activity.TakePhotoScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-
         <activity
-            android:name="com.nic.PMAYSurvey.activity.ViewServerDataScreen"
+            android:name=".activity.ViewServerDataScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
+        <activity android:name=".activity.MainPage" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.nic.PMAYSurvey.provider"
+            android:authorities="com.nic.nutrigarden.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
     </application>
 
 </manifest>

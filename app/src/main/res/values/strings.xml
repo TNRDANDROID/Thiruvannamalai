@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">PMAY Survey</string>
+    <string name="app_name">NutriGarden</string>
     <string name="hint_password">Password</string>
     <string name="hint_username">UserName</string>
     <string name="btn_login">Login</string>
@@ -14,7 +14,32 @@
     <string name="view_action">View Action</string>
     <string name="action_taken_tv" tools:ignore="ExtraTranslation">Action Taken Against Inspection Report for High Value Project</string>
     <string name="init_vector">2SN22SkJGDyOAXUU</string>
+    <string name="main_page">Main Page</string>
+    <string name="log_out_icon">log_out_icon</string>
+    <string name="go">Go</string>
+    <string name="pending_works_for_upload">Pending Works for Upload</string>
+    <string name="sync">Sync</string>
+    <string name="pending_uploads">Pending Uploads</string>
+    <string name="upload_icon">upload_icon</string>
+    <string name="software_designed_amp_developed_by_nic"><![CDATA[Software Designed & Developed by NIC]]></string>
+    <string name="select_type_of_tree">Select Type of Tree</string>
+    <string name="select_self_help_group_member">Select Self Help Group Member</string>
+    <string name="select_self_help_group">Select Self Help Group</string>
+    <string name="home_page">Home Page</string>
+    <string name="back_icon">back_icon</string>
+    <string name="select_fin_year">Select Fin Year</string>
+    <string name="after_capture">After Capture</string>
+    <string name="save_local">Save Local</string>
+    <string name="before_capture">Before Capture</string>
 
-
-
+    <string name="gps_is_not_turned_on">GPS is not turned on…</string>
+    <string name="satellite">Satellite communication not available to get GPS Co-ordination Please Capture Photo in Open Area…</string>
+    <string name="permission_required">Permissions required!</string>
+    <string name="camera_need_permission">Camera needs few permissions to work properly. Grant them in settings.</string>
+    <string name="goto_settings">GOTO SETTINGS</string>
+    <string name="cancel">Cancel</string>
+    <string name="user_canceled_image_capture">User cancelled image capture</string>
+    <string name="sorry_failed_to_capture">Sorry! Failed to capture image</string>
+    <string name="user_canceled_video">User cancelled video recording</string>
+    <string name="sorry_failed_capture_video">Sorry! Failed to record video</string>
 </resources>

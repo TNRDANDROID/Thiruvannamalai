@@ -3,7 +3,7 @@
     <data>
         <variable
             name="activity"
-            type="com.nic.PMAYSurvey.activity.SplashScreen" />
+            type="com.nic.nutrigarden.activity.SplashScreen" />
     </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -38,7 +38,7 @@
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="PMAY Survey"
+            android:text="@string/app_name"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_15sdp" />
 
