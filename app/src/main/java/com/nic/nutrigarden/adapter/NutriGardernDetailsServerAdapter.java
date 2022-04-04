@@ -1,6 +1,7 @@
 package com.nic.nutrigarden.adapter;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Base64;
@@ -8,6 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -90,7 +94,8 @@ public class NutriGardernDetailsServerAdapter extends RecyclerView.Adapter<Nutri
         holder.pendingAdapterBinding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletePending(position);
+                //deletePending(position);
+                save_and_delete_alert(position,"delete");
             }
         });
 
@@ -155,6 +160,50 @@ public class NutriGardernDetailsServerAdapter extends RecyclerView.Adapter<Nutri
     @Override
     public int getItemCount() {
         return pendingListValues.size();
+    }
+
+    public void save_and_delete_alert(int position,String save_delete){
+        try {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.alert_dialog);
+
+            TextView text = (TextView) dialog.findViewById(R.id.tv_message);
+            if(save_delete.equals("save")) {
+                text.setText(context.getResources().getString(R.string.do_u_want_to_upload));
+            }
+            else if(save_delete.equals("delete")){
+                text.setText(context.getResources().getString(R.string.do_u_want_to_delete));
+            }
+
+            Button yesButton = (Button) dialog.findViewById(R.id.btn_ok);
+            Button noButton = (Button) dialog.findViewById(R.id.btn_cancel);
+            noButton.setVisibility(View.VISIBLE);
+            noButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            yesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(save_delete.equals("save")) {
+                        dialog.dismiss();
+                    }
+                    else if(save_delete.equals("delete")) {
+                        deletePending(position);
+                        dialog.dismiss();
+                    }
+                }
+            });
+
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 

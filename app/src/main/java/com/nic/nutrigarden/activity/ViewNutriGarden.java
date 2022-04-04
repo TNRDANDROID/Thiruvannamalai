@@ -99,6 +99,13 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
 
             }
         });
+
+        nutriGardenBinding.backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public void setAllAdapter(){
@@ -179,6 +186,9 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     Toasty.success(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
                     getdetails_of_nutri_garden_view();
+                }if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("NO_RECORD")) {
+                    Toasty.success(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
+                    getdetails_of_nutri_garden_view();
                 }
                 Log.d("DeleteTreeJson", "" + responseDecryptedBlockKey);
             }
@@ -211,10 +221,10 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
                         PMAYSurvey nutriGardenDetails = new PMAYSurvey();
                         try {
                             nutriGardenDetails.setFin_year(jsonArray.getJSONObject(i).getString("fin_year"));
-                            nutriGardenDetails.setShg_code(jsonArray.getJSONObject(i).getInt("self_help_group_code"));
-                            nutriGardenDetails.setShg_name(jsonArray.getJSONObject(i).getString("self_help_group_name"));
-                            nutriGardenDetails.setShg_member_code(jsonArray.getJSONObject(i).getInt("self_help_group_member_code"));
-                            nutriGardenDetails.setMember_name(jsonArray.getJSONObject(i).getString("self_help_group_member_name"));
+                            nutriGardenDetails.setShg_code(jsonArray.getJSONObject(i).getInt("shg_code"));
+                            nutriGardenDetails.setShg_name(jsonArray.getJSONObject(i).getString("shg_name"));
+                            nutriGardenDetails.setShg_member_code(jsonArray.getJSONObject(i).getInt("shg_member_code"));
+                            nutriGardenDetails.setMember_name(jsonArray.getJSONObject(i).getString("shg_member_name"));
                             nutriGardenDetails.setWork_code(jsonArray.getJSONObject(i).getInt("work_type_id"));
                             nutriGardenDetails.setWork_name(jsonArray.getJSONObject(i).getString("work_name"));
                             nutriGarednDetails.add(nutriGardenDetails);

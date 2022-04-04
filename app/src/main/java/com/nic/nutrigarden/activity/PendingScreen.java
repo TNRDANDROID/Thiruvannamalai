@@ -147,7 +147,7 @@ public class PendingScreen extends AppCompatActivity implements Api.ServerRespon
     }
 
     public void homePage() {
-        Intent intent = new Intent(this, HomePage.class);
+        Intent intent = new Intent(this, MainPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("Home", "Home");
         startActivity(intent);

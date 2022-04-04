@@ -45,4 +45,6 @@
 
     <string name="do_u_want_to_delete">Do you want to delete?</string>
     <string name="do_u_want_to_upload">Do you want to Upload?</string>
+    <string name="entry_form">Entry Form</string>
+    <string name="view_data">View Data</string>
 </resources>

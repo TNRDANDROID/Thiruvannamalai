@@ -298,6 +298,12 @@ public class NewHomePage extends AppCompatActivity {
                 showNutriGardenDetails();
             }
         });
+        newHomePageBinding.backImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
     }
 
@@ -499,7 +505,7 @@ public class NewHomePage extends AppCompatActivity {
             if(self_Group_code!=0){
                 if(self_Group_member_code!=0){
                     if(tree_type_code!=0){
-                       if(newHomePageBinding.beforeImage.getDrawable()!=null){
+                       if(before_image_byte!=null && before_image_byte.length>0){
                            image_flag="after";
                            getLatLong();
                        }
@@ -528,8 +534,8 @@ public class NewHomePage extends AppCompatActivity {
             if(self_Group_code!=0){
                 if(self_Group_member_code!=0){
                     if(tree_type_code!=0){
-                        if(beforeofflatTextValue!=0.0&&beforeofflongTextValue!=0.0){
-                            if(afterofflatTextValue!=0.0&&afterofflongTextValue!=0.0){
+                        if(before_image_byte!=null && before_image_byte.length>0){
+                            if(after_image_byte!=null && after_image_byte.length>0){
                                 saveLocally("after_tree");
                             }
                             else {
