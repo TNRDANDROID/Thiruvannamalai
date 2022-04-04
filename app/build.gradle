@@ -11,8 +11,8 @@ android {
         multiDexEnabled true
 
         targetSdkVersion 29
-        versionCode 3
-        versionName "3"
+        versionCode 1
+        versionName "1"
     }
     signingConfigs {
         release {
@@ -57,7 +57,7 @@ android {
             signingConfig signingConfigs.debug
             resValue "string", "LOGIN_URL", "https://drdpr.tn.gov.in/project/webservices_forms/login_service/login_services.php"
             resValue "string", "BASE_SERVICES_URL", "https://drdpr.tn.gov.in/project/webservices_forms/master_services/master_services.php"
-            resValue "string", "APP_MAIN_SERVICES_URL", "https://drdpr.tn.gov.in/project/webservices_forms/pmay/pmay_services.php"
+            resValue "string", "APP_MAIN_SERVICES_URL", "https://drdpr.tn.gov.in/project/webservices_forms/village/nutri_garden/nutri_garden_services.php"
             resValue "string", "TNRD_HOST_NAME", "drdpr.tn.gov.in"
             resValue "string", "SUB_DOMAIN", "www.drdpr.tn.gov.in"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

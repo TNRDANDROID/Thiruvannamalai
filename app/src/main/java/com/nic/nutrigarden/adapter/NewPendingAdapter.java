@@ -1,14 +1,19 @@
 package com.nic.nutrigarden.adapter;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -44,7 +49,8 @@ public class NewPendingAdapter extends RecyclerView.Adapter<NewPendingAdapter.My
     JSONObject dataset = new JSONObject();
     dbData dbData;
     private LayoutInflater layoutInflater;
-
+    public  DBHelper dbHelper;
+    public  SQLiteDatabase db;
     public NewPendingAdapter(Activity context, List<PMAYSurvey> pendingListValues,dbData dbData) {
 
         this.context = context;
@@ -52,6 +58,13 @@ public class NewPendingAdapter extends RecyclerView.Adapter<NewPendingAdapter.My
 
         this.dbData=dbData;
         this.pendingListValues = pendingListValues;
+
+        try {
+            dbHelper = new DBHelper(context);
+            db = dbHelper.getWritableDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -89,14 +102,16 @@ public class NewPendingAdapter extends RecyclerView.Adapter<NewPendingAdapter.My
         holder.pendingAdapterBinding.upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadPending(position);
+                //uploadPending(position);
+                save_and_delete_alert(position,"save");
             }
         });
 
         holder.pendingAdapterBinding.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletePending(position);
+                //deletePending(position);
+                save_and_delete_alert(position,"delete");
             }
         });
 
@@ -117,8 +132,8 @@ public class NewPendingAdapter extends RecyclerView.Adapter<NewPendingAdapter.My
         String shg_code = String.valueOf(pendingListValues.get(position).getShg_code());
         String shg_member_code = String.valueOf(pendingListValues.get(position).getShg_member_code());
 
-        int sdsm = db.delete(DBHelper.SAVE_BEFORE_TREE_IMAGE_TABLE, "shg_code = ? and shg_member_code", new String[]{shg_code,shg_member_code});
-        int sdsm1 = db.delete(DBHelper.SAVE_AFTER_TREE_IMAGE_TABLE, "shg_code = ? and shg_member_code", new String[]{shg_code,shg_member_code});
+        int sdsm = db.delete(DBHelper.SAVE_BEFORE_TREE_IMAGE_TABLE, "shg_code = ? and shg_member_code = ?", new String[]{shg_code,shg_member_code});
+        int sdsm1 = db.delete(DBHelper.SAVE_AFTER_TREE_IMAGE_TABLE, "shg_code = ? and shg_member_code = ?", new String[]{shg_code,shg_member_code});
         pendingListValues.remove(position);
         notifyItemRemoved(position);
         notifyItemChanged(position, pendingListValues.size());
@@ -200,6 +215,51 @@ public class NewPendingAdapter extends RecyclerView.Adapter<NewPendingAdapter.My
         byte [] b=baos.toByteArray();
         String temp= Base64.encodeToString(b, Base64.DEFAULT);
         return temp;
+    }
+
+    public void save_and_delete_alert(int position,String save_delete){
+        try {
+            final Dialog dialog = new Dialog(context);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.alert_dialog);
+
+            TextView text = (TextView) dialog.findViewById(R.id.tv_message);
+            if(save_delete.equals("save")) {
+                text.setText(context.getResources().getString(R.string.do_u_want_to_upload));
+            }
+            else if(save_delete.equals("delete")){
+                text.setText(context.getResources().getString(R.string.do_u_want_to_delete));
+            }
+
+            Button yesButton = (Button) dialog.findViewById(R.id.btn_ok);
+            Button noButton = (Button) dialog.findViewById(R.id.btn_cancel);
+            noButton.setVisibility(View.VISIBLE);
+            noButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            yesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(save_delete.equals("save")) {
+                        uploadPending(position);
+                        dialog.dismiss();
+                    }
+                    else if(save_delete.equals("delete")) {
+                        deletePending(position);
+                        dialog.dismiss();
+                    }
+                }
+            });
+
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

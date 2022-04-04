@@ -42,4 +42,7 @@
     <string name="sorry_failed_to_capture">Sorry! Failed to capture image</string>
     <string name="user_canceled_video">User cancelled video recording</string>
     <string name="sorry_failed_capture_video">Sorry! Failed to record video</string>
+
+    <string name="do_u_want_to_delete">Do you want to delete?</string>
+    <string name="do_u_want_to_upload">Do you want to Upload?</string>
 </resources>

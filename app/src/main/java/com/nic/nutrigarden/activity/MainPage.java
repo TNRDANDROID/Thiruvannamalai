@@ -195,8 +195,10 @@ public class MainPage extends AppCompatActivity implements Api.ServerResponseLis
 
         if (workImageCount.size() > 0) {
             mainPageBinding.syncLayout.setVisibility(View.VISIBLE);
+            mainPageBinding.pendingCount.setText(""+workImageCount.size());
         }else {
             mainPageBinding.syncLayout.setVisibility(View.GONE);
+            mainPageBinding.pendingCount.setText("0");
         }
     }
 
