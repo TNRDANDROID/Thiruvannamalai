@@ -676,6 +676,7 @@ public class dbData {
     public void deleteself_help_group_member() { db.execSQL("delete from " + DBHelper.MASTER_SELF_HELP_GROUP_MEMBER_TABLE);}
     public void deleteSAVE_BEFORE_TREE_IMAGE_TABLE() { db.execSQL("delete from " + DBHelper.SAVE_BEFORE_TREE_IMAGE_TABLE);}
     public void deleteSAVE_AFTER_TREE_IMAGE_TABLE() { db.execSQL("delete from " + DBHelper.SAVE_AFTER_TREE_IMAGE_TABLE);}
+    public void deleteSAVE_TREE_IMAGE_TABLE() { db.execSQL("delete from " + DBHelper.SAVE_TREE_IMAGE_TABLE);}
 
 
 
@@ -694,6 +695,7 @@ public class dbData {
 
         deleteSAVE_BEFORE_TREE_IMAGE_TABLE();
         deleteSAVE_AFTER_TREE_IMAGE_TABLE();
+        deleteSAVE_TREE_IMAGE_TABLE();
     }
 
 

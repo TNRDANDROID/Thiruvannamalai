@@ -177,6 +177,11 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                         new InsertNutriGartenDetails().execute(jsonObject);
                 }
+                else  {
+                    Toasty.success(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
+                    nutriGardenBinding.pendingList.setVisibility(View.GONE);
+
+                }
                 Log.d("nutri_garden_view", "" + responseDecryptedBlockKey);
             }
             if ("DeleteTreeJson".equals(urlType) && loginResponse != null) {
@@ -186,7 +191,8 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     Toasty.success(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
                     getdetails_of_nutri_garden_view();
-                }if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("NO_RECORD")) {
+                }
+                else {
                     Toasty.success(this, jsonObject.getString("MESSAGE"), Toast.LENGTH_LONG, true).show();
                     getdetails_of_nutri_garden_view();
                 }
@@ -251,6 +257,7 @@ public class ViewNutriGarden extends AppCompatActivity implements Api.ServerResp
             }
             else {
                 nutriGardenBinding.pendingList.setVisibility(View.GONE);
+                nutriGardenBinding.pendingList.setAdapter(null);
             }
         }
     }

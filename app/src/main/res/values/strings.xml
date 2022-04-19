@@ -28,9 +28,9 @@
     <string name="home_page">Home Page</string>
     <string name="back_icon">back_icon</string>
     <string name="select_fin_year">Select Fin Year</string>
-    <string name="after_capture">After Capture</string>
+    <string name="after_capture">மரக்கன்று நட்ட பின்</string>
     <string name="save_local">Save Local</string>
-    <string name="before_capture">Before Capture</string>
+    <string name="before_capture">மரக்கன்று நடுவதற்கு முன்</string>
 
     <string name="gps_is_not_turned_on">GPS is not turned on…</string>
     <string name="satellite">Satellite communication not available to get GPS Co-ordination Please Capture Photo in Open Area…</string>
