@@ -40,7 +40,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.AssessmentDemadSearch"></activity>
         <activity
             android:name=".activity.ViewNutriGarden"
             android:configChanges="orientation|keyboardHidden"

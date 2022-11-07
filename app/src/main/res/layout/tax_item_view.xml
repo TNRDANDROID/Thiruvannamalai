@@ -4,9 +4,11 @@
 
     <data>
 
+<!--
         <variable
             name="adapter"
             type="com.nic.nutrigarden.adapter.TaxListAdapter" />
+-->
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

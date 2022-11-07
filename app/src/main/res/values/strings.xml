@@ -48,6 +48,10 @@
     <string name="entry_form">Entry Form</string>
     <string name="view_data">View Data</string>
 
-
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="radio">Radio</string>
+    <string name="library">Library</string>
     <string name="GoldleafBold">GoldleafBold.ttf</string>
 </resources>

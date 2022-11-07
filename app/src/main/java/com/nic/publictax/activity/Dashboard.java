@@ -13,11 +13,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import com.android.volley.VolleyError;
 import com.nic.publictax.R;
 import com.nic.publictax.api.Api;
@@ -32,24 +30,12 @@ import com.nic.publictax.session.PrefManager;
 import com.nic.publictax.support.ProgressHUD;
 import com.nic.publictax.utils.UrlGenerator;
 import com.nic.publictax.utils.Utils;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-import me.ertugrul.lib.OnItemReselectedListener;
-
 
 public class Dashboard extends AppCompatActivity implements Api.ServerResponseListener, View.OnClickListener, MyDialog.myOnClickListener {
     private DashboardBinding dashboardBinding;
     private PrefManager prefManager;
-    public com.nic.publictax.dataBase.dbData dbData = new dbData(this);
-    public static DBHelper dbHelper;
-    public static SQLiteDatabase db;
-    Handler myHandler = new Handler();
-    private ProgressHUD progressHUD;
 
 
     @Override
@@ -59,12 +45,6 @@ public class Dashboard extends AppCompatActivity implements Api.ServerResponseLi
         dashboardBinding = DataBindingUtil.setContentView(this, R.layout.dashboard);
         dashboardBinding.setActivity(this);
         prefManager = new PrefManager(this);
-        try {
-            dbHelper = new DBHelper(this);
-            db = dbHelper.getWritableDatabase();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         dashboardBinding.menuIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,14 +52,18 @@ public class Dashboard extends AppCompatActivity implements Api.ServerResponseLi
                 openMenuDrawer();
             }
         });
-        getTaxCollection();
+//        getTaxCollection();
+        dashboardBinding.bottomBar.setActiveItem(1);
+        dashboardBinding.bottomBar.setBadge(2);
+        dashboardBinding.bottomBar.removeBadge(2);
+        /*dashboardBinding.bottomBar.setOnItemSelected(new O);
         dashboardBinding.bottomBar.setOnItemReselectListener(new OnItemReselectedListener() {
             @Override
             public void onItemReselect(int pos) {
                 Toast.makeText(Dashboard.this, "selected"+pos, Toast
                         .LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 
     public void openMenuDrawer(){
