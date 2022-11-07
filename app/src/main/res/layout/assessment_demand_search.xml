@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.nic.publictax.activity.LoginScreen" />
+    </data>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/header_layout"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/sample_logo"
+                android:src="@mipmap/tamilnadu_logo"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_layout"
+            android:layout_above="@+id/wave_bg">
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <LinearLayout
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_25sdp"
+                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/new_rect_light_color_curved_bg">
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:id="@+id/profile_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:src="@drawable/ic_person_icon"/>
+
+                        <EditText
+                            android:id="@+id/user_name"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:textSize="@dimen/_11sdp"
+                            android:layout_height="match_parent"
+                            android:inputType="textPersonName"
+                            android:background="@color/full_transparent"
+                            android:layout_toEndOf="@id/profile_icon"
+                            android:layout_centerVertical="true"
+                            android:hint="Name"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/new_rect_light_color_curved_bg">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:id="@+id/password_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:src="@drawable/ic_phone"/>
+
+                        <EditText
+                            android:id="@+id/phone_number"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:textSize="@dimen/_11sdp"
+                            android:background="@color/full_transparent"
+                            android:layout_toEndOf="@id/password_icon"
+                            android:layout_centerVertical="true"
+                            android:hint="Phone Number"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/new_rect_light_color_curved_bg">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:id="@+id/email_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:src="@drawable/ic_email"/>
+
+                        <EditText
+                            android:id="@+id/email"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="textEmailAddress"
+                            android:maxLength="10"
+                            android:textSize="@dimen/_11sdp"
+                            android:background="@color/full_transparent"
+                            android:layout_toEndOf="@id/email_icon"
+                            android:layout_centerVertical="true"
+                            android:hint="Email"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/new_rect_light_color_curved_bg">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:id="@+id/district_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:src="@drawable/ic_district_icon"/>
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/district_spinner"
+                            android:layout_toEndOf="@+id/district_icon"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/new_rect_light_color_curved_bg">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:id="@+id/block_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:src="@drawable/ic_district_icon"/>
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/block_spinner"
+                            android:layout_toEndOf="@+id/block_icon"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/new_rect_light_color_curved_bg">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:id="@+id/village_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:src="@drawable/ic_district_icon"/>
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/village_spinner"
+                            android:layout_toEndOf="@+id/village_icon"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/new_rect_light_color_curved_bg">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:id="@+id/tax_type_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:src="@drawable/ic_tax_icon"/>
+
+                        <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/tax_type_spinner"
+                            android:layout_toEndOf="@+id/tax_type_icon"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:background="@drawable/new_rect_light_color_curved_bg">
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:id="@+id/assessment_icon"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:src="@drawable/ic_assessment_icon"/>
+
+                        <EditText
+                            android:id="@+id/assessment_number"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:textSize="@dimen/_11sdp"
+                            android:background="@color/full_transparent"
+                            android:layout_toEndOf="@id/assessment_icon"
+                            android:layout_centerVertical="true"
+                            android:hint="Assessment Number"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="@dimen/_35sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:background="@drawable/new_rect_fill_curved_bg">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/full_transparent"
+                            android:id="@+id/btn_signin"
+                            android:text="Go"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:clickable="true"
+                            android:focusable="true"/>
+                    </RelativeLayout>
+
+
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/wave_bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_wave_1"
+            />
+    </RelativeLayout>
+</layout>
