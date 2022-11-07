@@ -7,7 +7,7 @@
 
         <variable
             name="activity"
-            type="com.nic.nutrigarden.activity.MainPage" />
+            type="com.nic.publictax.activity.MainPage" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

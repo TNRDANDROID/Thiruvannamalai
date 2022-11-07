@@ -5,7 +5,7 @@
 
         <variable
             name="activity"
-            type="com.nic.nutrigarden.activity.HomePage" />
+            type="com.nic.publictax.activity.HomePage" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#285FBA</color>
-    <color name="colorPrimaryDark">#7535AD</color>
-    <color name="colorAccent">#7535AD</color>
+
+    <color name="colorPrimary">#7f7ded</color>
+    <color name="colorPrimary2">#6c71ed</color>
+    <color name="colorPrimaryDark">#7b65ec</color>
+    <color name="colorAccent">#9a8eeb</color>
+    <color name="colorAccent2">#e3dafc</color>
+
 
     <color name="address">#2F7092</color>
     <color name="followers">#0D5D98</color>

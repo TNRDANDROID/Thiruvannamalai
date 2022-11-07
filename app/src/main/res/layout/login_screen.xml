@@ -5,7 +5,7 @@
 
         <variable
             name="activity"
-            type="com.nic.nutrigarden.activity.LoginScreen" />
+            type="com.nic.publictax.activity.LoginScreen" />
     </data>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,7 +35,7 @@
                 android:textAlignment="center"
                 android:textColor="#ffff"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:fontFamily="@string/GoldleafBold" />
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout

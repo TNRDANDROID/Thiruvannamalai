@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nic.nutrigarden">
+    package="com.nic.publictax">
 
     <supports-screens
         android:anyDensity="true"
@@ -40,18 +40,22 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activity.ViewNutriGarden"
+        <activity android:name=".activity.AssessmentDemadSearch"></activity>
+        <activity
+            android:name=".activity.ViewNutriGarden"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan"></activity>
-        <activity android:name=".activity.NewPendingScreen"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
+        <activity
+            android:name=".activity.NewPendingScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan"/>
-        <activity android:name=".activity.NewHomePage"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
+        <activity
+            android:name=".activity.NewHomePage"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan"/>
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -111,14 +115,16 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity android:name=".activity.MainPage"
+        <activity
+            android:name=".activity.MainPage"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan"/>
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
+        <activity android:name=".activity.Dashboard" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.nic.nutrigarden.provider"
+            android:authorities="com.nic.publictax.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

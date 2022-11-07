@@ -6,7 +6,7 @@
 
         <variable
             name="adapter"
-            type="com.nic.nutrigarden.adapter.ViewServerDataListAdapter" />
+            type="com.nic.publictax.adapter.ViewServerDataListAdapter" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
