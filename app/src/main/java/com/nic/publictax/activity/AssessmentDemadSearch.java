@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,6 +97,13 @@ public class AssessmentDemadSearch extends AppCompatActivity implements Api.Serv
             }
         });
 
+        demadSearchBinding.go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDashBoardScreen();
+            }
+        });
+
         if(Utils.isOnline()){
             getDistrictList();
             getTaxTypeList();
@@ -164,8 +172,7 @@ public class AssessmentDemadSearch extends AppCompatActivity implements Api.Serv
         try {
             JSONObject responseObj = serverResponse.getJsonResponse();
             String urlType = serverResponse.getApi();
-            String status;
-            String response;
+
 
             if ("DistrictList".equals(urlType) && responseObj != null) {
                 if (responseObj.getString("STATUS").equalsIgnoreCase("SUCCESS") && responseObj.getString("RESPONSE").equalsIgnoreCase("SUCCESS")) {
@@ -432,5 +439,10 @@ public class AssessmentDemadSearch extends AppCompatActivity implements Api.Serv
             e.printStackTrace();
         }
     }
-
+    private void showDashBoardScreen() {
+        Intent intent = new Intent(AssessmentDemadSearch.this, Dashboard.class);
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
 }

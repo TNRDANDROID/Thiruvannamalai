@@ -23,7 +23,7 @@
             <RelativeLayout
                 android:id="@+id/toll_bar"
                 android:layout_width="match_parent"
-                android:background="@drawable/background"
+                android:background="@drawable/gradeint_background_new"
                 android:layout_height="@dimen/_50sdp">
                 <ImageView
                     android:layout_width="wrap_content"
@@ -55,167 +55,204 @@
                     android:layout_alignParentRight="true" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="@dimen/_10sdp"
-                android:id="@+id/header"
-                android:background="@drawable/half_circle_bg"
-                android:layout_below="@+id/toll_bar">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/profile_image"
-                    android:layout_width="@dimen/_80sdp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_height="@dimen/_80sdp"
-                    android:layout_margin="@dimen/_5sdp"
-                    android:src="@drawable/ic_profile"
-                    android:tint="@color/white"
-                    app:civ_border_width="2dp"
-                    app:civ_circle_background_color="@color/full_transparent"
-                    app:civ_border_color="@color/white"/>
-                <TextView
-                    android:layout_gravity="top|center"
-                    android:id="@+id/name"
-                    android:layout_below="@+id/profile_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_centerHorizontal="true"
-                    android:padding="2dp"
-                    android:text="Name"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
-                <TextView
-                    android:layout_gravity="top|center"
-                    android:id="@+id/area"
-                    android:layout_below="@+id/name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_centerHorizontal="true"
-                    android:padding="2dp"
-                    android:text="Location"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10sdp"
-                    android:textStyle="bold"
-                    />
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/header">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:textColor="@color/d_grey3"
-                    android:id="@+id/header_tv"
-                    android:textSize="@dimen/_14sdp"
-                    android:text="Tax List"
-                    android:textStyle="bold"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_200sdp"
-                    android:layout_below="@+id/header_tv"
-                    android:id="@+id/recycler"
-                    android:scrollbarSize="0dp"/>
-                <RelativeLayout
+                android:layout_below="@+id/toll_bar"
+                android:layout_above="@+id/bottomBar">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/recycler"
-                    android:layout_margin="@dimen/_10sdp"
-                    >
+                    android:orientation="vertical">
                     <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:background="@drawable/rectangle_box_color"
-                        android:id="@+id/search_layout">
-                        <EditText
-                            android:layout_width="@dimen/_140sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:id="@+id/title_tv"
-                            android:layout_centerVertical="true"
-                            android:hint="Search"
-                            android:textColorHint="@color/white"
-                            android:background="@color/full_transparent"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:gravity="center_vertical"
-                            android:textColor="@color/d_grey3"
-                            android:textSize="@dimen/_12sdp"
-                            tools:ignore="Autofill,TextFields" />
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_100sdp"
+                        android:id="@+id/header"
+                        android:background="@drawable/half_circle_bg"
+                        >
 
-                        <ImageView
-                            android:id="@+id/search"
-                            android:layout_toRightOf="@+id/title_tv"
-                            android:layout_width="@dimen/_25sdp"
-                            android:layout_height="@dimen/_25sdp"
-                            android:padding="@dimen/_4sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="start"
-                            android:src="@mipmap/ic_search_white_24dp"
-                            android:tint="@color/white"
-                            tools:ignore="ContentDescription" />
-
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/profile_image"
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:src="@drawable/ic_new_avathar"
+                                android:tint="@color/white"
+                                />
+                            <LinearLayout
+                                android:layout_toEndOf="@+id/profile_image"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_gravity="top|center"
+                                    android:id="@+id/name"
+                                    android:layout_below="@+id/profile_image"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:layout_centerHorizontal="true"
+                                    android:padding="2dp"
+                                    android:text="Name"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:textStyle="bold"
+                                    />
+                                <TextView
+                                    android:layout_gravity="top|center"
+                                    android:id="@+id/area"
+                                    android:layout_below="@+id/name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal"
+                                    android:layout_centerHorizontal="true"
+                                    android:padding="2dp"
+                                    android:text="Location"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:textStyle="bold"
+                                    />
+                            </LinearLayout>
+                        </RelativeLayout>
                     </RelativeLayout>
                     <RelativeLayout
-                        android:id="@+id/date_layout"
-                        android:layout_toRightOf="@+id/search_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:background="@drawable/button_background_color"
-                        android:orientation="vertical"
-                        android:visibility="visible">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/header">
+                        <RelativeLayout
+                            android:id="@+id/recy_layout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:gravity="center">
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recycler"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="0dp"
+                                android:orientation="horizontal"
+                                android:scrollbarSize="1dp"
+                                android:scrollbars="vertical"
+                                android:visibility="visible" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="15dp"
+                                android:visibility="gone"
+                                android:text="No Data Found"
+                                android:layout_centerInParent="true"
+                                android:id="@+id/no_data_found"/>
 
 
-                        <TextView
-                            android:id="@+id/date"
+                        </RelativeLayout>
+                        <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerInParent="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginStart="10dp"
-                            android:layout_toStartOf="@+id/calendar_icon"
-                            android:ellipsize="marquee"
-                            android:focusable="true"
-                            android:focusableInTouchMode="true"
-                            android:hint="25-06-2022"
-                            android:textColor="@color/white"
-                            android:textColorHint="@color/white"
-                            android:textAlignment="viewStart"
-                            android:textSize="@dimen/_13sdp"
-                            />
+                            android:layout_below="@+id/recy_layout"
+                            android:layout_margin="@dimen/_10sdp"
+                            >
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:background="@drawable/rectangle_box_color"
+                                android:id="@+id/search_layout">
+                                <EditText
+                                    android:layout_width="@dimen/_100sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:id="@+id/title_tv"
+                                    android:layout_centerVertical="true"
+                                    android:hint="Search"
+                                    android:textColorHint="@color/white"
+                                    android:background="@color/full_transparent"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp"
+                                    android:gravity="center_vertical"
+                                    android:textColor="@color/d_grey3"
+                                    android:textSize="@dimen/_12sdp"
+                                    tools:ignore="Autofill,TextFields" />
 
-                        <TextView
-                            android:id="@+id/calendar_icon"
+                                <ImageView
+                                    android:id="@+id/search"
+                                    android:layout_toRightOf="@+id/title_tv"
+                                    android:layout_width="@dimen/_25sdp"
+                                    android:layout_height="@dimen/_25sdp"
+                                    android:padding="@dimen/_4sdp"
+                                    android:layout_centerVertical="true"
+                                    android:layout_gravity="start"
+                                    android:src="@mipmap/ic_search_white_24dp"
+                                    android:tint="@color/white"
+                                    tools:ignore="ContentDescription" />
 
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_15sdp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerInParent="true"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginEnd="@dimen/_6sdp"
-                            android:background="@drawable/date"
-                            android:focusable="true"
-                            android:padding="@dimen/_8sdp"
-                            android:focusableInTouchMode="true"
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:id="@+id/date_layout"
+                                android:layout_toRightOf="@+id/search_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:background="@drawable/button_background_color"
+                                android:orientation="vertical"
+                                android:visibility="visible">
 
-                            android:gravity="center" />
 
+                                <TextView
+                                    android:id="@+id/date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginStart="10dp"
+                                    android:layout_toStartOf="@+id/calendar_icon"
+                                    android:ellipsize="marquee"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
+                                    android:hint="25-06-2022"
+                                    android:textColor="@color/white"
+                                    android:textColorHint="@color/white"
+                                    android:textAlignment="viewStart"
+                                    android:textSize="@dimen/_13sdp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/calendar_icon"
+
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_15sdp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerInParent="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginEnd="@dimen/_6sdp"
+                                    android:background="@drawable/date"
+                                    android:focusable="true"
+                                    android:padding="@dimen/_8sdp"
+                                    android:focusableInTouchMode="true"
+
+                                    android:gravity="center" />
+
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
 
                     </RelativeLayout>
-
-                </RelativeLayout>
-
-            </RelativeLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
             <me.ibrahimsn.lib.NiceBottomBar
                 android:layout_alignParentBottom="true"
                 android:id="@+id/bottomBar"

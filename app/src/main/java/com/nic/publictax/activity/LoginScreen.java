@@ -82,15 +82,15 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     public void intializeUI() {
         prefManager = new PrefManager(this);
-        loginScreenBinding.btnSignin.setOnClickListener(this);
+        loginScreenBinding.go.setOnClickListener(this);
 
         loginScreenBinding.password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         //loginScreenBinding.inputLayoutEmail.setTypeface(FontCache.getInstance(this).getFont(FontCache.Font.REGULAR));
         //loginScreenBinding.inputLayoutPassword.setTypeface(FontCache.getInstance(this).getFont(FontCache.Font.REGULAR));
-        loginScreenBinding.btnSignin.setTypeface(FontCache.getInstance(this).getFont(FontCache.Font.MEDIUM));
+        loginScreenBinding.go.setTypeface(FontCache.getInstance(this).getFont(FontCache.Font.MEDIUM));
         //loginScreenBinding.inputLayoutEmail.setHintTextAppearance(R.style.InActive);
         //loginScreenBinding.inputLayoutPassword.setHintTextAppearance(R.style.InActive);
-        setTextStyle();
+        //setTextStyle();
         loginScreenBinding.password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
@@ -119,7 +119,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         loginScreenBinding.signInTitle1.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/GoldleafBold.ttf"));
         loginScreenBinding.userName.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/GoldleafBold.ttf"));
         loginScreenBinding.password.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/GoldleafBold.ttf"));
-        loginScreenBinding.btnSignin.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/GoldleafBold.ttf"));
+        loginScreenBinding.go.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/GoldleafBold.ttf"));
         loginScreenBinding.headerTitle.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/GoldleafBold.ttf"));
         loginScreenBinding.tvVersion.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/GoldleafBold.ttf"));
         loginScreenBinding.signInTitle.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/GoldleafBold.ttf"));
@@ -406,7 +406,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
 
     private void showHomeScreen() {
-        Intent intent = new Intent(LoginScreen.this, Dashboard.class);
+        Intent intent = new Intent(LoginScreen.this, AssessmentDemadSearch.class);
         intent.putExtra("Home", "Login");
         startActivity(intent);
         finish();

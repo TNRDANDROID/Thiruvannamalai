@@ -120,6 +120,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity android:name=".activity.Dashboard" />
+        <activity android:name=".activity.AssessmentDemadSearch" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
