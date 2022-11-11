@@ -31,30 +31,15 @@
     <application
         android:name=".application.NICApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_app_logo"
+        android:icon="@drawable/tax_public_icon"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:resizeableActivity="true"
-        android:roundIcon="@drawable/ic_app_logo"
+        android:roundIcon="@drawable/tax_public_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity
-            android:name=".activity.ViewNutriGarden"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity
-            android:name=".activity.NewPendingScreen"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity
-            android:name=".activity.NewHomePage"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -80,47 +65,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name=".activity.HomePage"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity
-            android:name=".activity.CameraScreen"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity
-            android:name=".activity.FullImageActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity
             android:name=".activity.AppUpdateDialog"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity
-            android:name=".activity.PendingScreen"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity
-            android:name=".activity.TakePhotoScreen"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity
-            android:name=".activity.ViewServerDataScreen"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity
-            android:name=".activity.MainPage"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity android:name=".activity.Dashboard" />
-        <activity android:name=".activity.AssessmentDemadSearch" />
+        <activity android:name=".activity.Registration" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

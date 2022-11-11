@@ -92,13 +92,12 @@
                                 android:layout_marginLeft="@dimen/_10sdp"
                                 android:orientation="vertical">
                                 <TextView
-                                    android:layout_gravity="top|center"
+                                    android:layout_gravity="top|start"
                                     android:id="@+id/name"
                                     android:layout_below="@+id/profile_image"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="center_horizontal"
-                                    android:layout_centerHorizontal="true"
+                                    android:gravity="start"
                                     android:padding="2dp"
                                     android:text="Name"
                                     android:textColor="@color/white"
@@ -251,6 +250,39 @@
                         </RelativeLayout>
 
                     </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/transaction_recy_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:gravity="center">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/transaction_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="0dp"
+                            android:layout_marginBottom="0dp"
+                            android:orientation="horizontal"
+                            android:scrollbarSize="1dp"
+                            android:scrollbars="vertical"
+                            android:visibility="visible" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="15dp"
+                            android:visibility="gone"
+                            android:text="No Data Found"
+                            android:layout_centerInParent="true"
+                            android:id="@+id/transaction_no_data_found"/>
+
+
+                    </RelativeLayout>
+
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
             <me.ibrahimsn.lib.NiceBottomBar

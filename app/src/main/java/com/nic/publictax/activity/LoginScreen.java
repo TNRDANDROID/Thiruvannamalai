@@ -24,7 +24,6 @@ import androidx.databinding.DataBindingUtil;
 import com.android.volley.VolleyError;
 import com.nic.publictax.R;
 import com.nic.publictax.api.Api;
-import com.nic.publictax.api.ApiService;
 import com.nic.publictax.api.ServerResponse;
 import com.nic.publictax.constant.AppConstant;
 import com.nic.publictax.dataBase.DBHelper;
@@ -35,7 +34,6 @@ import com.nic.publictax.model.PublicTax;
 import com.nic.publictax.session.PrefManager;
 import com.nic.publictax.support.ProgressHUD;
 import com.nic.publictax.utils.FontCache;
-import com.nic.publictax.utils.UrlGenerator;
 import com.nic.publictax.utils.Utils;
 
 import org.json.JSONArray;
@@ -406,7 +404,14 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
 
     private void showHomeScreen() {
-        Intent intent = new Intent(LoginScreen.this, AssessmentDemadSearch.class);
+        Intent intent = new Intent(LoginScreen.this, Dashboard.class);
+        intent.putExtra("Home", "Login");
+        startActivity(intent);
+        finish();
+        overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+    }
+    public void showRegistrationScreen() {
+        Intent intent = new Intent(LoginScreen.this, Registration.class);
         intent.putExtra("Home", "Login");
         startActivity(intent);
         finish();

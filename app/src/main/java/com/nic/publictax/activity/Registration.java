@@ -19,7 +19,7 @@ import com.nic.publictax.api.Api;
 import com.nic.publictax.api.ApiService;
 import com.nic.publictax.api.ServerResponse;
 import com.nic.publictax.constant.AppConstant;
-import com.nic.publictax.databinding.ActivityAssessmentDemadSearchBinding;
+import com.nic.publictax.databinding.RegistrationBinding;
 import com.nic.publictax.model.PublicTax;
 import com.nic.publictax.session.PrefManager;
 import com.nic.publictax.support.ProgressHUD;
@@ -33,10 +33,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AssessmentDemadSearch extends AppCompatActivity implements Api.ServerResponseListener{
+public class Registration extends AppCompatActivity implements Api.ServerResponseListener{
     private PrefManager prefManager;
     private ProgressHUD progressHUD;
-    ActivityAssessmentDemadSearchBinding demadSearchBinding;
+    RegistrationBinding demadSearchBinding;
     private List<PublicTax> District = new ArrayList<>();
     private ArrayList<PublicTax> taxTypeList = new ArrayList<>();
     private List<PublicTax> Block = new ArrayList<>();
@@ -49,7 +49,7 @@ public class AssessmentDemadSearch extends AppCompatActivity implements Api.Serv
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        demadSearchBinding = DataBindingUtil.setContentView(this, R.layout.activity_assessment_demad_search);
+        demadSearchBinding = DataBindingUtil.setContentView(this, R.layout.registration);
         demadSearchBinding.setActivity(this);
         prefManager = new PrefManager(this);
 
@@ -254,14 +254,14 @@ public class AssessmentDemadSearch extends AppCompatActivity implements Api.Serv
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressHUD = ProgressHUD.show(AssessmentDemadSearch.this, "Downloading", true, false, null);
+            progressHUD = ProgressHUD.show(Registration.this, "Downloading", true, false, null);
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             hideProgress();
-            demadSearchBinding.districtSpinner.setAdapter(new CommonAdapter(AssessmentDemadSearch.this,District,"DistrictList"));
+            demadSearchBinding.districtSpinner.setAdapter(new CommonAdapter(Registration.this,District,"DistrictList"));
         }
     }
     @SuppressLint("StaticFieldLeak")
@@ -306,14 +306,14 @@ public class AssessmentDemadSearch extends AppCompatActivity implements Api.Serv
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressHUD = ProgressHUD.show(AssessmentDemadSearch.this, "Downloading", true, false, null);
+            progressHUD = ProgressHUD.show(Registration.this, "Downloading", true, false, null);
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             hideProgress();
-            demadSearchBinding.blockSpinner.setAdapter(new CommonAdapter(AssessmentDemadSearch.this,Block,"BlockList"));
+            demadSearchBinding.blockSpinner.setAdapter(new CommonAdapter(Registration.this,Block,"BlockList"));
         }
     }
     @SuppressLint("StaticFieldLeak")
@@ -329,7 +329,7 @@ public class AssessmentDemadSearch extends AppCompatActivity implements Api.Serv
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             hideProgress();
-            demadSearchBinding.villageSpinner.setAdapter(new CommonAdapter(AssessmentDemadSearch.this,Village,"VillageList"));
+            demadSearchBinding.villageSpinner.setAdapter(new CommonAdapter(Registration.this,Village,"VillageList"));
         }
 
         @Override
@@ -419,13 +419,13 @@ public class AssessmentDemadSearch extends AppCompatActivity implements Api.Serv
         protected void onPostExecute(ArrayList<PublicTax> list) {
             super.onPostExecute(list);
             hideProgress();
-            demadSearchBinding.taxTypeSpinner.setAdapter(new CommonAdapter(AssessmentDemadSearch.this,taxTypeList,"TaxTypeList"));
+            demadSearchBinding.taxTypeSpinner.setAdapter(new CommonAdapter(Registration.this,taxTypeList,"TaxTypeList"));
 
         }
     }
     public void showProgress() {
         try {
-            progressHUD = ProgressHUD.show(AssessmentDemadSearch.this, "Loading...", true, false, null);
+            progressHUD = ProgressHUD.show(Registration.this, "Loading...", true, false, null);
         } catch (Exception e) {
         }
 
@@ -440,7 +440,7 @@ public class AssessmentDemadSearch extends AppCompatActivity implements Api.Serv
         }
     }
     private void showDashBoardScreen() {
-        Intent intent = new Intent(AssessmentDemadSearch.this, Dashboard.class);
+        Intent intent = new Intent(Registration.this, Dashboard.class);
         startActivity(intent);
         finish();
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);

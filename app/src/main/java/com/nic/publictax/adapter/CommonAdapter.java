@@ -63,17 +63,8 @@ public class CommonAdapter extends BaseAdapter {
         else if (type.equalsIgnoreCase("HabitationList")) {
             tv_type.setText(pmgsySurvey.getHabitationName());
         }
-        else if (type.equalsIgnoreCase("self_GroupList")) {
-            tv_type.setText(pmgsySurvey.getShg_name());
-        }
         else if (type.equalsIgnoreCase("fin_Year_List")) {
             tv_type.setText(pmgsySurvey.getFin_year());
-        }
-        else if (type.equalsIgnoreCase("type_tree_List")) {
-            tv_type.setText(pmgsySurvey.getWork_name());
-        }
-        else if (type.equalsIgnoreCase("self_Group_Member_List")) {
-            tv_type.setText(pmgsySurvey.getMember_name());
         }
         else if (type.equalsIgnoreCase("TaxTypeList")) {
             tv_type.setText(pmgsySurvey.getTaxtypedesc_en());

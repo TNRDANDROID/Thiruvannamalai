@@ -6,7 +6,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.nic.nutrigarden"
+        applicationId "com.nic.PublicTax"
         minSdkVersion 21
         multiDexEnabled true
 
@@ -29,7 +29,7 @@ android {
             def version = variant.versionName
             def date = new Date()
             def formattedDate = date.format('ddMMyy')
-            outputFileName = "NutriGarden${variant.buildType.name}_v${version}_${formattedDate}.apk"
+            outputFileName = "PublicTax${variant.buildType.name}_v${version}_${formattedDate}.apk"
         }
     }
     buildTypes {
@@ -117,4 +117,5 @@ dependencies {
 
     ///Circle Image View
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    compile 'com.roughike:bottom-bar:2.3.1'
 }

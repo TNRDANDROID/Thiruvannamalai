@@ -11,7 +11,10 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -22,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.VolleyError;
 import com.nic.publictax.R;
 import com.nic.publictax.adapter.TaxTypeListAdapter;
+import com.nic.publictax.adapter.TransactionListAdapter;
 import com.nic.publictax.api.Api;
 import com.nic.publictax.api.ApiService;
 import com.nic.publictax.api.ServerResponse;
@@ -32,6 +36,7 @@ import com.nic.publictax.model.PublicTax;
 import com.nic.publictax.session.PrefManager;
 import com.nic.publictax.utils.UrlGenerator;
 import com.nic.publictax.utils.Utils;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +49,9 @@ public class Dashboard extends AppCompatActivity implements Api.ServerResponseLi
     private PrefManager prefManager;
 
     TaxTypeListAdapter taxListAdapter;
+    TransactionListAdapter transactionListAdapter;
     ArrayList<PublicTax> taxTypeList;
+    ArrayList<PublicTax> transactionList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,17 +68,7 @@ public class Dashboard extends AppCompatActivity implements Api.ServerResponseLi
             }
         });
         getTaxTypeList();
-        dashboardBinding.bottomBar.setActiveItem(1);
-        dashboardBinding.bottomBar.setBadge(2);
-        dashboardBinding.bottomBar.removeBadge(2);
-        /*dashboardBinding.bottomBar.setOnItemSelected(new O);
-        dashboardBinding.bottomBar.setOnItemReselectListener(new OnItemReselectedListener() {
-            @Override
-            public void onItemReselect(int pos) {
-                Toast.makeText(Dashboard.this, "selected"+pos, Toast
-                        .LENGTH_SHORT).show();
-            }
-        });*/
+        getTransactionList();
     }
 
     public void openMenuDrawer(){
@@ -108,7 +105,20 @@ public class Dashboard extends AppCompatActivity implements Api.ServerResponseLi
             e.printStackTrace();
         }
     }
+    public void getTransactionList() {
+        try {
+            new ApiService(this).makeJSONObjectRequest("Transaction", Api.Method.POST, UrlGenerator.getServicesListUrl(), TransactionJsonParams(), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
     public JSONObject taxTypeListJsonParams() throws JSONException {
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_SERVICE_ID, "TaxTypeList");
+        Log.d("taxTypeList", "" + dataSet);
+        return dataSet;
+    }
+    public JSONObject TransactionJsonParams() throws JSONException {
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_SERVICE_ID, "TaxTypeList");
         Log.d("taxTypeList", "" + dataSet);
@@ -128,6 +138,18 @@ public class Dashboard extends AppCompatActivity implements Api.ServerResponseLi
                     new Insert_TaxCollection().execute(responseObj);
                 }
                 Log.d("TaxCollection", "" + responseObj);
+            }
+            if ("Transaction".equals(urlType) && responseObj != null) {
+                if (responseObj.getString("STATUS").equalsIgnoreCase("SUCCESS") && responseObj.getString("RESPONSE").equalsIgnoreCase("SUCCESS")) {
+                    String responseDecryptedBlockKey = "{\"STATUS\":\"OK\",\"RESPONSE\":\"OK\",\"JSON_DATA\":[{\"tran_id\":\"1\",\"transactionName\":\"One\",\n" +
+                            "  \"transactionDate\":\"10-11-2022 10:30\",\"transactionStatus\":\"Success\"},{\"tran_id\":\"2\",\"transactionName\":\"Two\",\n" +
+                            "  \"transactionDate\":\"10-11-2022 10:30\",\"transactionStatus\":\"Faild\"},{\"tran_id\":\"3\",\"transactionName\":\"Three\",\n" +
+                            "  \"transactionDate\":\"10-11-2022 10:30\",\"transactionStatus\":\"Pending\"},{\"tran_id\":\"4\",\"transactionName\":\"Four\",\n" +
+                            "  \"transactionDate\":\"10-11-2022 10:30\",\"transactionStatus\":\"Cancelled\"}]}";
+                    JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                    new Insert_Transactions().execute(jsonObject);
+                }
+                Log.d("Transaction", "" + responseObj);
             }
 
         } catch (JSONException e) {
@@ -217,11 +239,13 @@ public class Dashboard extends AppCompatActivity implements Api.ServerResponseLi
 
             ArrayList<Integer> taxImageList = new ArrayList<>();
             taxImageList.add(R.drawable.property_tax);
-            taxImageList.add(R.drawable.water_tax);
+            taxImageList.add(R.drawable.water_tap);
             taxImageList.add(R.drawable.professional_tax);
             taxImageList.add(R.drawable.non_tax);
             taxImageList.add(R.drawable.trade_licence_tax);
-            dashboardBinding.recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+//            dashboardBinding.recycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+            dashboardBinding.recycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+
             if(list.size()>0){
                 dashboardBinding.noDataFound.setVisibility(View.GONE);
                 dashboardBinding.recycler.setVisibility(View.VISIBLE);
@@ -230,6 +254,66 @@ public class Dashboard extends AppCompatActivity implements Api.ServerResponseLi
             }else {
                 dashboardBinding.noDataFound.setVisibility(View.VISIBLE);
                 dashboardBinding.recycler.setVisibility(View.GONE);
+            }
+
+
+        }
+    }
+    @SuppressLint("StaticFieldLeak")
+    public class Insert_Transactions extends AsyncTask<JSONObject, Void, ArrayList<PublicTax>> {
+
+        @Override
+        protected ArrayList<PublicTax> doInBackground(JSONObject... params) {
+
+            if (params.length > 0) {
+                transactionList = new ArrayList<>();
+                JSONArray jsonArray = new JSONArray();
+
+                try {
+                    jsonArray = params[0].getJSONArray("JSON_DATA");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArray.length(); i++) {
+
+                    try {
+                        PublicTax tax = new PublicTax();
+                        tax.setTransactionName(jsonArray.getJSONObject(i).getString("transactionName"));
+                        tax.setTransactionDate(jsonArray.getJSONObject(i).getString("transactionDate"));
+                        tax.setTransactionStatus(jsonArray.getJSONObject(i).getString("transactionStatus"));
+
+                        transactionList.add(tax);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+            }
+
+
+            return transactionList;
+
+
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<PublicTax> list) {
+            super.onPostExecute(list);
+
+//            dashboardBinding.transactionRecycler.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+            dashboardBinding.transactionRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+
+            if(list.size()>0){
+                dashboardBinding.transactionNoDataFound.setVisibility(View.GONE);
+                dashboardBinding.transactionRecycler.setVisibility(View.VISIBLE);
+                transactionListAdapter = new TransactionListAdapter(Dashboard.this,list);
+                dashboardBinding.transactionRecycler.setAdapter(transactionListAdapter);
+            }else {
+                dashboardBinding.transactionNoDataFound.setVisibility(View.VISIBLE);
+                dashboardBinding.transactionRecycler.setVisibility(View.GONE);
             }
 
 

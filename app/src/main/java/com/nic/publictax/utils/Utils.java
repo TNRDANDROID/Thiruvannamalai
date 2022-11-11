@@ -1098,12 +1098,6 @@ public class Utils {
             throw new RuntimeException(ex);
         }
     }
-    public static JSONObject motivatorScheduleListJsonParams() throws JSONException {
-        JSONObject dataSet = new JSONObject();
-        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_MOTIVATOR_SCHEDULE);
-        Log.d("object", "" + dataSet);
-        return dataSet;
-    }
 
     public static String formatDateReverse (String date){
         String initDateFormat = "yyyy-MM-dd";
@@ -1150,12 +1144,6 @@ public class Utils {
         Date date = new Date();
         return formatter.format(date);
     }
-    public static JSONObject pmayListJsonParams() throws JSONException {
-        JSONObject dataSet = new JSONObject();
-        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_PMAY_SOURCE_ALL);
-        Log.d("object", "" + dataSet);
-        return dataSet;
-    }
 
 
 
@@ -1166,13 +1154,6 @@ public class Utils {
         dataSet.put(AppConstant.DISTRICT_CODE, prefManager.getDistrictCode());
         dataSet.put(AppConstant.BLOCK_CODE, prefManager.getBlockCode());
         Log.d("villageListDistBlock", "" + dataSet);
-        return dataSet;
-    }
-    public static JSONObject nutri_garden_master_form_listJsonParams(Activity activity) throws JSONException {
-        prefManager = new PrefManager(activity);
-        JSONObject dataSet = new JSONObject();
-        dataSet.put(AppConstant.KEY_SERVICE_ID, AppConstant.KEY_nutri_garden_master_form_list);
-        Log.d("nutri_garden_master", "" + dataSet);
         return dataSet;
     }
 

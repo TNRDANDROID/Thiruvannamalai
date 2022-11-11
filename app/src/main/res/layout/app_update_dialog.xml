@@ -53,7 +53,7 @@
             android:gravity="center"
             android:lineSpacingExtra="5dp"
             android:padding="@dimen/padding"
-            android:text="You need to update PMAY Survey"
+            android:text="You need to update PublicTax Survey"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             style="@string/font_circular_medium" />
 
@@ -65,7 +65,7 @@
             android:gravity="center"
             android:lineSpacingExtra="5dp"
             android:padding="@dimen/padding"
-            android:text="This version of PMAY Survey is no longer supported. Please go to Official Site and install new version"
+            android:text="This version of PublicTax is no longer supported. Please go to Official Site and install new version"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             style="@string/font_normal" />
 
