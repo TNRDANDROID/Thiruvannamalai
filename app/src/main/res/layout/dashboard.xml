@@ -55,16 +55,12 @@
                     android:layout_alignParentRight="true" />
             </RelativeLayout>
 
-            <androidx.core.widget.NestedScrollView
+            <LinearLayout
+                android:layout_below="@+id/toll_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/toll_bar"
-                android:layout_above="@+id/bottomBar">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <RelativeLayout
+                android:orientation="vertical">
+                <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_100sdp"
                         android:id="@+id/header"
@@ -122,187 +118,88 @@
                             </LinearLayout>
                         </RelativeLayout>
                     </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/header">
-                        <RelativeLayout
-                            android:id="@+id/recy_layout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginLeft="@dimen/_10sdp"
-                            android:layout_marginRight="@dimen/_10sdp"
-                            android:layout_marginBottom="@dimen/_10sdp"
-                            android:gravity="center">
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recycler"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="0dp"
-                                android:layout_marginBottom="0dp"
-                                android:orientation="horizontal"
-                                android:scrollbarSize="1dp"
-                                android:scrollbars="vertical"
-                                android:visibility="visible" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:padding="15dp"
-                                android:visibility="gone"
-                                android:text="No Data Found"
-                                android:layout_centerInParent="true"
-                                android:id="@+id/no_data_found"/>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:baselineAligned="false">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_margin="@dimen/_10sdp"
+                android:orientation="horizontal"
+                android:layout_centerInParent="true"
+                android:weightSum="2"
+                android:baselineAligned="false">
+                <RelativeLayout
+                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/rectangle_box_color"
+                    android:id="@+id/details_entry">
 
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/recy_layout"
-                            android:layout_margin="@dimen/_10sdp"
-                            >
-                            <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:background="@drawable/rectangle_box_color"
-                                android:id="@+id/search_layout">
-                                <EditText
-                                    android:layout_width="@dimen/_100sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:id="@+id/title_tv"
-                                    android:layout_centerVertical="true"
-                                    android:hint="Search"
-                                    android:textColorHint="@color/white"
-                                    android:background="@color/full_transparent"
-                                    android:layout_marginStart="@dimen/_10sdp"
-                                    android:layout_marginEnd="@dimen/_10sdp"
-                                    android:gravity="center_vertical"
-                                    android:textColor="@color/d_grey3"
-                                    android:textSize="@dimen/_12sdp"
-                                    tools:ignore="Autofill,TextFields" />
-
-                                <ImageView
-                                    android:id="@+id/search"
-                                    android:layout_toRightOf="@+id/title_tv"
-                                    android:layout_width="@dimen/_25sdp"
-                                    android:layout_height="@dimen/_25sdp"
-                                    android:padding="@dimen/_4sdp"
-                                    android:layout_centerVertical="true"
-                                    android:layout_gravity="start"
-                                    android:src="@mipmap/ic_search_white_24dp"
-                                    android:tint="@color/white"
-                                    tools:ignore="ContentDescription" />
-
-                            </RelativeLayout>
-                            <RelativeLayout
-                                android:id="@+id/date_layout"
-                                android:layout_toRightOf="@+id/search_layout"
-                                android:layout_width="wrap_content"
-                                android:layout_height="@dimen/_25sdp"
-                                android:layout_marginLeft="@dimen/_10sdp"
-                                android:background="@drawable/button_background_color"
-                                android:orientation="vertical"
-                                android:visibility="visible">
-
-
-                                <TextView
-                                    android:id="@+id/date"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_centerInParent="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_toStartOf="@+id/calendar_icon"
-                                    android:ellipsize="marquee"
-                                    android:focusable="true"
-                                    android:focusableInTouchMode="true"
-                                    android:hint="25-06-2022"
-                                    android:textColor="@color/white"
-                                    android:textColorHint="@color/white"
-                                    android:textAlignment="viewStart"
-                                    android:textSize="@dimen/_13sdp"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/calendar_icon"
-
-                                    android:layout_width="@dimen/_15sdp"
-                                    android:layout_height="@dimen/_15sdp"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerInParent="true"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginEnd="@dimen/_6sdp"
-                                    android:background="@drawable/date"
-                                    android:focusable="true"
-                                    android:padding="@dimen/_8sdp"
-                                    android:focusableInTouchMode="true"
-
-                                    android:gravity="center" />
-
-
-                            </RelativeLayout>
-
-                        </RelativeLayout>
-
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:id="@+id/transaction_recy_layout"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:layout_marginBottom="@dimen/_10sdp"
-                        android:gravity="center">
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/transaction_recycler"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="0dp"
-                            android:layout_marginBottom="0dp"
-                            android:orientation="horizontal"
-                            android:scrollbarSize="1dp"
-                            android:scrollbars="vertical"
-                            android:visibility="visible" />
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="Details Entry"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="15dp"
-                            android:visibility="gone"
-                            android:text="No Data Found"
-                            android:layout_centerInParent="true"
-                            android:id="@+id/transaction_no_data_found"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/details_verify"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/button_background_color"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_5sdp"
+                        android:layout_centerInParent="true"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="Details Verification"/>
 
+                </RelativeLayout>
+            </LinearLayout>
+                <RelativeLayout
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="@dimen/_120sdp"
+                    android:layout_weight="1"
+                    android:id="@+id/details_view"
+                    android:layout_height="@dimen/_80sdp"
+                    android:background="@drawable/button_background_color"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/_14sdp"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:text="View Details"/>
 
-                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
 
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-            <me.ibrahimsn.lib.NiceBottomBar
-                android:layout_alignParentBottom="true"
-                android:id="@+id/bottomBar"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                app:menu="@menu/menu_bottom"
-                app:backgroundColor="@color/colorPrimary"
-                app:indicatorEnabled="true"
-                app:indicatorColor="@color/white"
-                app:indicatorWidth="1dp"
-                app:textColor="@color/white"
-                app:textColorActive="@color/black"
-                app:textSize="@dimen/_10sdp"
-                app:iconSize="@dimen/_15sdp"
-                app:badgeColor="@color/colorPrimaryDark"
-                app:indicatorInterpolator="anticipateOvershoot" />
         </RelativeLayout>
-
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation"
             android:layout_width="wrap_content"
@@ -312,6 +209,7 @@
 
             <include layout="@layout/navigation_layout"/>
         </com.google.android.material.navigation.NavigationView>
+
     </androidx.drawerlayout.widget.DrawerLayout>
 
 </layout>

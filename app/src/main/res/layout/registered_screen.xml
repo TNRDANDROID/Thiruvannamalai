@@ -13,7 +13,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradeint_background_new">
+        android:background="@color/white">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -22,33 +22,56 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/header_layout"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:id="@+id/toll_bar">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:background="@drawable/gradeint_background_new"
+                    android:layout_height="@dimen/_50sdp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/menu_icon"
+                        android:rotation="180"
+                        android:src="@drawable/ic_arrow_forward_black_24dp"
+                        android:layout_centerVertical="true"
+                        android:tint="@color/white"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_14sdp"
+                        android:text="Details"
+                        android:textStyle="bold"/>
 
-                <ImageView
-                    android:padding="@dimen/_10sdp"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_70sdp"
-                    android:layout_gravity="center_horizontal"
-                    android:id="@+id/sample_logo"
-                    android:src="@mipmap/tamilnadu_logo"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="Details"
-                    android:textSize="@dimen/_15sdp"
-                    android:textColor="@color/white"
-                    android:layout_marginStart="@dimen/_28sdp"
-                    android:padding="@dimen/_5sdp"/>
-
+                    <ImageView
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/log_out_icon"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/ic_logout"
+                        android:layout_centerVertical="true"
+                        android:tint="@color/white"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_alignParentRight="true" />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:id="@+id/header"
+                    android:background="@drawable/half_circle_bg"
+                    >
+                </RelativeLayout>
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/header_layout"
+                android:layout_below="@+id/toll_bar"
                 android:layout_marginBottom="@dimen/_15sdp"
                 android:layout_above="@+id/wave_bg">
                 <androidx.core.widget.NestedScrollView
@@ -71,7 +94,7 @@
                             android:layout_marginRight="@dimen/_3sdp"
                             android:layout_marginTop="@dimen/_20sdp"
                             app:cardElevation="@dimen/_3sdp"
-                            app:cardBackgroundColor="@color/white">
+                            app:cardBackgroundColor="@color/card_background_color">
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
@@ -108,7 +131,7 @@
                             android:layout_marginBottom="@dimen/_3sdp"
                             android:layout_marginTop="@dimen/_15sdp"
                             app:cardElevation="@dimen/_3sdp"
-                            app:cardBackgroundColor="@color/white">
+                            app:cardBackgroundColor="@color/card_background_color">
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
@@ -144,7 +167,7 @@
                             android:layout_marginRight="@dimen/_3sdp"
                             android:layout_marginTop="@dimen/_15sdp"
                             app:cardElevation="@dimen/_3sdp"
-                            app:cardBackgroundColor="@color/white">
+                            app:cardBackgroundColor="@color/card_background_color">
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
@@ -181,7 +204,7 @@
                             android:layout_marginBottom="@dimen/_3sdp"
                             android:layout_marginTop="@dimen/_15sdp"
                             app:cardElevation="@dimen/_3sdp"
-                            app:cardBackgroundColor="@color/white">
+                            app:cardBackgroundColor="@color/card_background_color">
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
@@ -217,7 +240,7 @@
                             android:layout_marginRight="@dimen/_3sdp"
                             android:layout_marginTop="@dimen/_15sdp"
                             app:cardElevation="@dimen/_3sdp"
-                            app:cardBackgroundColor="@color/white">
+                            app:cardBackgroundColor="@color/card_background_color">
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
@@ -254,7 +277,7 @@
                             android:layout_marginBottom="@dimen/_3sdp"
                             android:layout_marginTop="@dimen/_15sdp"
                             app:cardElevation="@dimen/_3sdp"
-                            app:cardBackgroundColor="@color/white">
+                            app:cardBackgroundColor="@color/card_background_color">
                             <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_35sdp"
@@ -294,9 +317,8 @@
 
 
                             <LinearLayout
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="0.9"
                                 android:orientation="vertical"
                                 tools:ignore="UselessParent">
 
@@ -371,5 +393,6 @@
 
             </RelativeLayout>
         </RelativeLayout>
+
     </RelativeLayout>
 </layout>
