@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable
             name="activity"
             type="com.nic.Thiruvannamalai.activity.SplashScreen" />
     </data>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradeint_background_new"
     tools:context="com.nic.RealTimeMonitoringSystem.activity.SplashScreen">
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_350sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/logo22">
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
         android:layout_marginTop="@dimen/_20sdp">
 
         <ImageView
@@ -43,6 +47,7 @@
             android:textSize="@dimen/_15sdp" />
 
     </RelativeLayout>
+
 
 </RelativeLayout>
 </layout>

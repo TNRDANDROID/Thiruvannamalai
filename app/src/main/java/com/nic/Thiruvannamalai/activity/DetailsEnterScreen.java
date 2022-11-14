@@ -60,6 +60,21 @@ public class DetailsEnterScreen extends AppCompatActivity {
                 }
             }
         });
+        registeredScreenBinding.imageViewPreview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (CameraUtils.checkPermissions(DetailsEnterScreen.this)) {
+                        captureImage();
+                    } else {
+                        requestCameraPermission(MEDIA_TYPE_IMAGE);
+                    }
+//                            checkPermissionForCamera();
+                } else {
+                    captureImage();
+                }
+            }
+        });
 
 
     }

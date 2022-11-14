@@ -9,12 +9,24 @@
             name="activity"
             type="com.nic.Thiruvannamalai.activity.Dashboard" />
     </data>
-    <androidx.drawerlayout.widget.DrawerLayout
+    <RelativeLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         >
+        <RelativeLayout
+            android:id="@+id/wave_bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_wave_1" />
+        <RelativeLayout
+            android:id="@+id/wave_bg2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/ic_wave" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -25,15 +37,6 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/gradeint_background_new"
                 android:layout_height="@dimen/_50sdp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/menu_icon"
-                    android:src="@drawable/ic_menu_icon"
-                    android:layout_centerVertical="true"
-                    android:tint="@color/white"
-                    android:layout_marginStart="@dimen/_15sdp"
-                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -72,12 +75,12 @@
                             android:layout_height="wrap_content">
                             <de.hdodenhof.circleimageview.CircleImageView
                                 android:id="@+id/profile_image"
-                                android:layout_width="@dimen/_40sdp"
+                                android:layout_width="@dimen/_50sdp"
                                 android:layout_marginTop="@dimen/_10sdp"
-                                android:layout_height="@dimen/_40sdp"
+                                android:layout_height="@dimen/_50sdp"
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="@dimen/_20sdp"
-                                android:src="@drawable/ic_new_avathar"
+                                android:src="@drawable/logo3"
                                 android:tint="@color/white"
                                 />
                             <LinearLayout
@@ -200,16 +203,7 @@
             </LinearLayout>
 
         </RelativeLayout>
-        <com.google.android.material.navigation.NavigationView
-            android:id="@+id/navigation"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="#ffffff">
 
-            <include layout="@layout/navigation_layout"/>
-        </com.google.android.material.navigation.NavigationView>
-
-    </androidx.drawerlayout.widget.DrawerLayout>
+    </RelativeLayout>
 
 </layout>
