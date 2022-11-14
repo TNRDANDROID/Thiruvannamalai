@@ -171,7 +171,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     }
 
     public void checkLoginScreen() {
-        loginScreenBinding.userName.setText("maedemo");
+        loginScreenBinding.userName.setText("tokenentry1");
         loginScreenBinding.password.setText("test123#$");//loc
         /*loginScreenBinding.userName.setText("kpmutmrvp34u2");
         loginScreenBinding.password.setText("rdas771#$");//pro*/
@@ -183,8 +183,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
             if (!validate())
                 return;
             else if (prefManager.getUserName().length() > 0 && password.length() > 0) {
-                showHomeScreen();
-                //new ApiService(this).makeRequest("LoginScreen", Api.Method.POST, UrlGenerator.getLoginUrl(), loginParams(), "not cache", this);
+//                showHomeScreen();
+                new ApiService(this).makeRequest("LoginScreen", Api.Method.POST, UrlGenerator.getLoginUrl(), loginParams(), "not cache", this);
             } else {
                 Utils.showAlert(this, "Please enter your username and password!");
             }
@@ -270,7 +270,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         String userDataDecrypt = Utils.decrypt(prefManager.getEncryptPass(), user_data);
                         Log.d("userdatadecry", "" + userDataDecrypt);
                         jsonObject = new JSONObject(userDataDecrypt);
-                        prefManager.setDistrictCode(jsonObject.get(AppConstant.DISTRICT_CODE));
+                     /*   prefManager.setDistrictCode(jsonObject.get(AppConstant.DISTRICT_CODE));
                         prefManager.setBlockCode(jsonObject.get(AppConstant.BLOCK_CODE));
                         prefManager.setPvCode(jsonObject.get(AppConstant.PV_CODE));
                         prefManager.setDistrictName(jsonObject.get(AppConstant.DISTRICT_NAME));
@@ -280,7 +280,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         Log.d("userdata", "" + prefManager.getDistrictCode() + prefManager.getBlockCode() + prefManager.getPvCode() + prefManager.getDistrictName() + prefManager.getBlockName() + prefManager.getName());
                         prefManager.setUserPassKey(decryptedKey);
                         //getVillageList();
-                        //getHabList();
+                        //getHabList();*/
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {

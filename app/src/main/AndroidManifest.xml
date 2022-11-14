@@ -71,6 +71,8 @@
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity android:name="com.nic.Thiruvannamalai.activity.Dashboard" />
         <activity android:name=".activity.DetailsEnterScreen" />
+        <activity android:name=".activity.ViewDetailsScreen" />
+        <activity android:name=".activity.QRVerifivation"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"

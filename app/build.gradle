@@ -43,7 +43,7 @@ android {
             debuggable true
             minifyEnabled true
             signingConfig signingConfigs.debug
-            resValue "string", "LOGIN_URL", "http://10.163.19.140:8080/vptax_new/project/webservices/login_service/login_services.php"
+            resValue "string", "LOGIN_URL", "http://10.163.19.140:8080/tvm/project_main/webservices/login_service/login_services.php"
             resValue "string", "BASE_SERVICES_URL", "http://10.163.19.140:8080/vptax_new/project/webservices/open_services/open_services.php"
             resValue "string", "APP_MAIN_SERVICES_URL", "http://10.163.19.140:8080/vptax_new/project/webservices_forms/village/nutri_garden/nutri_garden_services.php"
             resValue "string", "TNRD_HOST_NAME", "10.163.19.140"

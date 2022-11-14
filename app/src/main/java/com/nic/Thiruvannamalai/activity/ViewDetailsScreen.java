@@ -10,14 +10,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -32,13 +29,12 @@ import com.nic.Thiruvannamalai.api.Api;
 import com.nic.Thiruvannamalai.api.ApiService;
 import com.nic.Thiruvannamalai.api.ServerResponse;
 import com.nic.Thiruvannamalai.constant.AppConstant;
-import com.nic.Thiruvannamalai.databinding.RegisteredScreenBinding;
+import com.nic.Thiruvannamalai.databinding.ViewDetailsScreenBinding;
 import com.nic.Thiruvannamalai.session.PrefManager;
 import com.nic.Thiruvannamalai.utils.CameraUtils;
 import com.nic.Thiruvannamalai.utils.UrlGenerator;
 import com.nic.Thiruvannamalai.utils.Utils;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,23 +46,23 @@ import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
 import static com.nic.Thiruvannamalai.utils.CameraUtils.MEDIA_TYPE_IMAGE;
 import static com.nic.Thiruvannamalai.utils.Utils.showAlert;
 
-public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerResponseListener  {
-    RegisteredScreenBinding registeredScreenBinding;
+public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerResponseListener  {
+    ViewDetailsScreenBinding binding;
     private PrefManager prefManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-        registeredScreenBinding = DataBindingUtil.setContentView(this, R.layout.registered_screen);
+        binding = DataBindingUtil.setContentView(this, R.layout.view_details_screen);
 
-        registeredScreenBinding.setActivity(this);
+        binding.setActivity(this);
         prefManager = new PrefManager(this);
-        registeredScreenBinding.imageView.setOnClickListener(new View.OnClickListener() {
+        binding.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (CameraUtils.checkPermissions(DetailsEnterScreen.this)) {
+                    if (CameraUtils.checkPermissions(ViewDetailsScreen.this)) {
                         captureImage();
                     } else {
                         requestCameraPermission(MEDIA_TYPE_IMAGE);
@@ -77,11 +73,11 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
                 }
             }
         });
-        registeredScreenBinding.imageViewPreview.setOnClickListener(new View.OnClickListener() {
+        binding.imageViewPreview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (CameraUtils.checkPermissions(DetailsEnterScreen.this)) {
+                    if (CameraUtils.checkPermissions(ViewDetailsScreen.this)) {
                         captureImage();
                     } else {
                         requestCameraPermission(MEDIA_TYPE_IMAGE);
@@ -97,13 +93,13 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
     }
     public void validate() {
 
-        if(!registeredScreenBinding.userName.getText().toString().equalsIgnoreCase("")){
-            if(!registeredScreenBinding.age.getText().toString().equalsIgnoreCase("")){
-                if(!registeredScreenBinding.location.getText().toString().equalsIgnoreCase("")){
-                    if(!registeredScreenBinding.pinCode.getText().toString().equalsIgnoreCase("")){
-                        if(!registeredScreenBinding.phoneNumber.getText().toString().equalsIgnoreCase("")){
-                            if(!registeredScreenBinding.adharNumber.getText().toString().equalsIgnoreCase("")){
-                                if (registeredScreenBinding.imageView.getDrawable() != null) {
+        if(!binding.userName.getText().toString().equalsIgnoreCase("")){
+            if(!binding.age.getText().toString().equalsIgnoreCase("")){
+                if(!binding.location.getText().toString().equalsIgnoreCase("")){
+                    if(!binding.pinCode.getText().toString().equalsIgnoreCase("")){
+                        if(!binding.phoneNumber.getText().toString().equalsIgnoreCase("")){
+                            if(!binding.adharNumber.getText().toString().equalsIgnoreCase("")){
+                                if (binding.imageView.getDrawable() != null) {
                                     saveData();
                                 }else {
                                     showAlert(this,"Please Capture Image");
@@ -148,16 +144,16 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
     public  JSONObject saveParams(Activity activity) throws JSONException {
         JSONObject dataset = new JSONObject();
         String image_str = "";
-        Bitmap bitmap = ((BitmapDrawable) registeredScreenBinding.imageView.getDrawable()).getBitmap();
+        Bitmap bitmap = ((BitmapDrawable) binding.imageView.getDrawable()).getBitmap();
         image_str = BitMapToString(bitmap);
         try{
             dataset.put(AppConstant.KEY_SERVICE_ID,"save");
-            dataset.put("userName",registeredScreenBinding.userName.getText().toString());
-            dataset.put("age", registeredScreenBinding.age.getText().toString());
-            dataset.put("location",registeredScreenBinding.location.getText().toString());
-            dataset.put("pinCode",registeredScreenBinding.pinCode.getText().toString());
-            dataset.put("phoneNumber", registeredScreenBinding.phoneNumber.getText().toString());
-            dataset.put("adharNumber", registeredScreenBinding.adharNumber.getText().toString());
+            dataset.put("userName", binding.userName.getText().toString());
+            dataset.put("age", binding.age.getText().toString());
+            dataset.put("location", binding.location.getText().toString());
+            dataset.put("pinCode", binding.pinCode.getText().toString());
+            dataset.put("phoneNumber", binding.phoneNumber.getText().toString());
+            dataset.put("adharNumber", binding.adharNumber.getText().toString());
             dataset.put("image", image_str);
 
         }
@@ -210,7 +206,7 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
                 .setMessage("Camera Need Few Permissions")
                 .setPositiveButton(getResources().getString(R.string.goto_settings), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        CameraUtils.openSettings(DetailsEnterScreen.this);
+                        CameraUtils.openSettings(ViewDetailsScreen.this);
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -238,9 +234,9 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
             String filePath = data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH);
             Bitmap rotatedBitmap = BitmapFactory.decodeFile(filePath);
 
-             registeredScreenBinding.imageViewPreview.setVisibility(View.GONE);
-             registeredScreenBinding.imageView.setVisibility(View.VISIBLE);
-             registeredScreenBinding.imageView.setImageBitmap(rotatedBitmap);
+             binding.imageViewPreview.setVisibility(View.GONE);
+             binding.imageView.setVisibility(View.VISIBLE);
+             binding.imageView.setImageBitmap(rotatedBitmap);
 
          }
 
@@ -260,14 +256,14 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
                     showAlert(this, "Your Data Updated Successfully!");
-                    registeredScreenBinding.userName.setText("");
-                    registeredScreenBinding.age.setText("");
-                    registeredScreenBinding.location.setText("");
-                    registeredScreenBinding.pinCode.setText("");
-                    registeredScreenBinding.phoneNumber.setText("");
-                    registeredScreenBinding.adharNumber.setText("");
-                    registeredScreenBinding.imageViewPreview.setVisibility(View.VISIBLE);
-                    registeredScreenBinding.imageView.setVisibility(View.GONE);
+                    binding.userName.setText("");
+                    binding.age.setText("");
+                    binding.location.setText("");
+                    binding.pinCode.setText("");
+                    binding.phoneNumber.setText("");
+                    binding.adharNumber.setText("");
+                    binding.imageViewPreview.setVisibility(View.VISIBLE);
+                    binding.imageView.setVisibility(View.GONE);
 
                 }
                 else if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("FAIL")) {

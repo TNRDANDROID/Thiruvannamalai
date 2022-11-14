@@ -19,7 +19,7 @@ public class UrlGenerator {
         return NICApplication.getAppString(R.string.BASE_SERVICES_URL);
     }
 
-    public static String getPMAYListUrl() {
+    public static String getAppMainService() {
         return NICApplication.getAppString(R.string.APP_MAIN_SERVICES_URL);
     }
 

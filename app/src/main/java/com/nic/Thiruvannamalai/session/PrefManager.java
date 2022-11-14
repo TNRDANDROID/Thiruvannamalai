@@ -42,6 +42,8 @@ public class PrefManager {
     private static final String KEY_DISTRICT_NAME = "District_Name";
     private static final String KEY_DESIGNATION = "Designation";
     private static final String KEY_NAME = "Name";
+    private static final String KEY_LEVEL = "Level";
+    private static final String KEY_DEPARTMENT_ID = "Level";
     private static final String KEY_BLOCK_NAME = "Block_Name";
     private static final String KEY_SPINNER_SELECTED_PVCODE = "spinner_selected_pv_code";
     private static final String KEY_SPINNER_SELECTED_BLOCKCODE = "spinner_selected_block_code";

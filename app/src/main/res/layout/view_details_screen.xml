@@ -7,7 +7,7 @@
 
         <variable
             name="activity"
-            type="com.nic.Thiruvannamalai.activity.DetailsEnterScreen" />
+            type="com.nic.Thiruvannamalai.activity.ViewDetailsScreen" />
     </data>
 
     <RelativeLayout
@@ -58,13 +58,6 @@
                         android:tint="@color/white"
                         android:layout_marginEnd="@dimen/_15sdp"
                         android:layout_alignParentRight="true" />
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_50sdp"
-                    android:id="@+id/header"
-                    android:background="@drawable/half_circle_bg"
-                    >
                 </RelativeLayout>
             </LinearLayout>
 
