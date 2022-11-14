@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nic.publictax">
+    package="com.nic.Thiruvannamalai">
 
     <supports-screens
         android:anyDensity="true"
@@ -29,7 +29,7 @@
     <uses-permission android:name="android.permission.FLAG_GRANT_READ_URI_PERMISSION" />
 
     <application
-        android:name=".application.NICApplication"
+        android:name="com.nic.Thiruvannamalai.application.NICApplication"
         android:allowBackup="true"
         android:icon="@drawable/tax_public_icon"
         android:label="@string/app_name"
@@ -45,7 +45,7 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".activity.SplashScreen">
+        <activity android:name="com.nic.Thiruvannamalai.activity.SplashScreen">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -60,21 +60,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.LoginScreen"
+            android:name="com.nic.Thiruvannamalai.activity.LoginScreen"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name=".activity.AppUpdateDialog"
+            android:name="com.nic.Thiruvannamalai.activity.AppUpdateDialog"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity android:name=".activity.Dashboard" />
-        <activity android:name=".activity.Registration" />
+        <activity android:name="com.nic.Thiruvannamalai.activity.Dashboard" />
+        <activity android:name=".activity.DetailsEnterScreen" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.nic.publictax.provider"
+            android:authorities="com.nic.Thiruvannamalai.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

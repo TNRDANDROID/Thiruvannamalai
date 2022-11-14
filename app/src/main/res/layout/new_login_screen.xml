@@ -6,7 +6,7 @@
 
         <variable
             name="activity"
-            type="com.nic.publictax.activity.LoginScreen" />
+            type="com.nic.Thiruvannamalai.activity.LoginScreen" />
     </data>
 
     <RelativeLayout
@@ -240,7 +240,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sign up"
-                    android:onClick="@{()-> activity.showRegistrationScreen()}"
                     android:textColor="#FFD600"
                     android:textSize="@dimen/_11sdp"
                     />

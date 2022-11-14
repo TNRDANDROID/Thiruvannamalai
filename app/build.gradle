@@ -6,7 +6,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.nic.PublicTax"
+        applicationId "com.nic.Thiruvannamalai"
         minSdkVersion 21
         multiDexEnabled true
 
@@ -29,7 +29,7 @@ android {
             def version = variant.versionName
             def date = new Date()
             def formattedDate = date.format('ddMMyy')
-            outputFileName = "PublicTax${variant.buildType.name}_v${version}_${formattedDate}.apk"
+            outputFileName = "Thiruvannamalai${variant.buildType.name}_v${version}_${formattedDate}.apk"
         }
     }
     buildTypes {
@@ -41,7 +41,7 @@ android {
         }
         local_host {
             debuggable true
-            minifyEnabled false
+            minifyEnabled true
             signingConfig signingConfigs.debug
             resValue "string", "LOGIN_URL", "http://10.163.19.140:8080/vptax_new/project/webservices/login_service/login_services.php"
             resValue "string", "BASE_SERVICES_URL", "http://10.163.19.140:8080/vptax_new/project/webservices/open_services/open_services.php"
@@ -52,7 +52,7 @@ android {
         }
         production {
             debuggable true
-            minifyEnabled false
+            minifyEnabled true
             shrinkResources false
             signingConfig signingConfigs.debug
             resValue "string", "LOGIN_URL", "https://vptax.tnrd.tn.gov.in/vptax_test/project/webservices/login_service/login_services.php"
@@ -118,4 +118,10 @@ dependencies {
     ///Circle Image View
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     compile 'com.roughike:bottom-bar:2.3.1'
+
+    ///Camera
+    implementation 'com.github.maayyaannkk:ImagePicker:1.0.13'
+    //PDF viewer
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
 }

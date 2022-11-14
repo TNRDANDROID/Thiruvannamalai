@@ -3,7 +3,7 @@
     <data>
         <variable
             name="activity"
-            type="com.nic.publictax.activity.AppUpdateDialog" />
+            type="com.nic.Thiruvannamalai.activity.AppUpdateDialog" />
     </data>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -53,7 +53,7 @@
             android:gravity="center"
             android:lineSpacingExtra="5dp"
             android:padding="@dimen/padding"
-            android:text="You need to update PublicTax Survey"
+            android:text="You need to update Thiruvannamalai Application"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             style="@string/font_circular_medium" />
 
@@ -65,7 +65,7 @@
             android:gravity="center"
             android:lineSpacingExtra="5dp"
             android:padding="@dimen/padding"
-            android:text="This version of PublicTax is no longer supported. Please go to Official Site and install new version"
+            android:text="This version of Thiruvannamalai Application is no longer supported. Please go to Official Site and install new version"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             style="@string/font_normal" />
 

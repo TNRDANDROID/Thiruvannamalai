@@ -7,7 +7,7 @@
 
         <variable
             name="activity"
-            type="com.nic.publictax.activity.Dashboard" />
+            type="com.nic.Thiruvannamalai.activity.Dashboard" />
     </data>
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"

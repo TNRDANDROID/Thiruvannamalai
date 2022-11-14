@@ -3,7 +3,7 @@
     <data>
         <variable
             name="activity"
-            type="com.nic.publictax.activity.SplashScreen" />
+            type="com.nic.Thiruvannamalai.activity.SplashScreen" />
     </data>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
