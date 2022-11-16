@@ -62,6 +62,10 @@ public class PrefManager {
     private static final String KEY_DELETE_ID = "deleteId";
     private static final String KEY_DELETE_POSITION = "deletePosition";
 
+    private static final String KEY_DEPT_ID = "dept_id";
+    private static final String KEY_ROLE_CODE = "role_code";
+    private static final String KEY_ROLE_NAME = "role_name";
+
 
     public PrefManager(Context context) {
         this._context = context;
@@ -86,6 +90,45 @@ public class PrefManager {
         editor.putString(IMEI,imei);
         editor.commit();
     }
+
+    public String getKeyLevel() {
+        return pref.getString(KEY_LEVEL,null);
+    }
+
+    public void setKeyLevel(String key_level) {
+        editor.putString(KEY_LEVEL,key_level);
+        editor.commit();
+    }
+
+    public String getKeyDeptId() {
+        return pref.getString(KEY_DEPT_ID,null);
+    }
+
+    public void setKeyDeptId(String key_dept_id) {
+        editor.putString(KEY_DEPT_ID,key_dept_id);
+        editor.commit();
+    }
+
+    public String getKeyRoleCode() {
+        return pref.getString(KEY_ROLE_CODE,null);
+    }
+
+    public void setKeyRoleCode(String key_role_code) {
+        editor.putString(KEY_ROLE_CODE,key_role_code);
+        editor.commit();
+    }
+
+    public String getKeyRoleName() {
+        return pref.getString(KEY_ROLE_NAME,null);
+    }
+
+    public void setKeyRoleName(String key_role_name) {
+        editor.putString(KEY_ROLE_NAME,key_role_name);
+        editor.commit();
+    }
+
+
+
 
     public void setAppKey(String appKey) {
         editor.putString(APP_KEY, appKey);

@@ -104,6 +104,7 @@
                                     android:textStyle="bold"
                                     />
                                 <TextView
+                                    android:visibility="gone"
                                     android:layout_gravity="top|center"
                                     android:id="@+id/area"
                                     android:layout_below="@+id/name"
@@ -133,17 +134,14 @@
                 android:baselineAligned="false">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
-                android:orientation="horizontal"
-                android:layout_centerInParent="true"
-                android:weightSum="2"
+                android:orientation="vertical"
                 android:baselineAligned="false">
                 <RelativeLayout
                     android:layout_margin="@dimen/_10sdp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
                     android:gravity="center_vertical"
                     android:background="@drawable/rectangle_box_color"
                     android:id="@+id/details_entry">
@@ -161,9 +159,8 @@
                 <RelativeLayout
                     android:id="@+id/details_verify"
                     android:layout_margin="@dimen/_10sdp"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_70sdp"
                     android:background="@drawable/button_background_color"
                     android:orientation="vertical"
                     android:visibility="visible">
@@ -179,13 +176,12 @@
                         android:text="Details Verification"/>
 
                 </RelativeLayout>
-            </LinearLayout>
                 <RelativeLayout
+                    android:layout_margin="@dimen/_10sdp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_width="@dimen/_120sdp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:id="@+id/details_view"
-                    android:layout_height="@dimen/_80sdp"
+                    android:layout_height="@dimen/_70sdp"
                     android:background="@drawable/button_background_color"
                     android:orientation="vertical"
                     android:visibility="visible">
@@ -200,6 +196,8 @@
                         android:text="View Details"/>
 
                 </RelativeLayout>
+            </LinearLayout>
+
             </LinearLayout>
 
         </RelativeLayout>

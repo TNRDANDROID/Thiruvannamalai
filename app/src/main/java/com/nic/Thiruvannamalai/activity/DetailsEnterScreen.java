@@ -138,27 +138,33 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
 
     }
     public JSONObject saveJsonParams() throws JSONException {
-        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), saveParams(this).toString());
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), saveParams().toString());
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
         Log.d("WorkListOptional", "" + dataSet);
         return dataSet;
     }
-    public  JSONObject saveParams(Activity activity) throws JSONException {
+    public  JSONObject saveParams() throws JSONException {
         JSONObject dataset = new JSONObject();
+        JSONObject dataset1 = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+
         String image_str = "";
         Bitmap bitmap = ((BitmapDrawable) registeredScreenBinding.imageView.getDrawable()).getBitmap();
         image_str = BitMapToString(bitmap);
         try{
-            dataset.put(AppConstant.KEY_SERVICE_ID,"save");
-            dataset.put("userName",registeredScreenBinding.userName.getText().toString());
-            dataset.put("age", registeredScreenBinding.age.getText().toString());
-            dataset.put("location",registeredScreenBinding.location.getText().toString());
-            dataset.put("pinCode",registeredScreenBinding.pinCode.getText().toString());
-            dataset.put("phoneNumber", registeredScreenBinding.phoneNumber.getText().toString());
-            dataset.put("adharNumber", registeredScreenBinding.adharNumber.getText().toString());
-            dataset.put("image", image_str);
+            dataset.put(AppConstant.KEY_SERVICE_ID,"t_tvm_deepa_festival_details_save");
+            dataset1.put("tvm_deepa_festival_id","");
+            dataset1.put("name",registeredScreenBinding.userName.getText().toString());
+            dataset1.put("age", registeredScreenBinding.age.getText().toString());
+            dataset1.put("location",registeredScreenBinding.location.getText().toString());
+            dataset1.put("pincode",registeredScreenBinding.pinCode.getText().toString());
+            dataset1.put("mobile_no", registeredScreenBinding.phoneNumber.getText().toString());
+            dataset1.put("aadhar_no", registeredScreenBinding.adharNumber.getText().toString());
+            dataset1.put("image", image_str);
+            jsonArray.put(dataset1);
+            dataset.put("tvm_deepa_festival",jsonArray);
 
         }
         catch (JSONException e){
@@ -259,13 +265,14 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
-                    showAlert(this, "Your Data Updated Successfully!");
+                    showAlert(this, jsonObject.getString("MESSAGE"));
                     registeredScreenBinding.userName.setText("");
                     registeredScreenBinding.age.setText("");
                     registeredScreenBinding.location.setText("");
                     registeredScreenBinding.pinCode.setText("");
                     registeredScreenBinding.phoneNumber.setText("");
                     registeredScreenBinding.adharNumber.setText("");
+                    registeredScreenBinding.imageView.setImageDrawable(null);
                     registeredScreenBinding.imageViewPreview.setVisibility(View.VISIBLE);
                     registeredScreenBinding.imageView.setVisibility(View.GONE);
 

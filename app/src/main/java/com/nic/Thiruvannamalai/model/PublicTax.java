@@ -156,4 +156,113 @@ public class PublicTax {
     public void setFin_year(String fin_year) {
         this.fin_year = fin_year;
     }
+
+    private int tvm_deepa_festival_id;
+    private int role_code;
+    private int dept_id;
+    private String name;
+    private String age;
+    private String pincode;
+    private String mobile_no;
+    private String location;
+    private String aadhar_no;
+    private String sl_no;
+    private String from_date;
+    private String to_date;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getTvm_deepa_festival_id() {
+        return tvm_deepa_festival_id;
+    }
+
+    public void setTvm_deepa_festival_id(int tvm_deepa_festival_id) {
+        this.tvm_deepa_festival_id = tvm_deepa_festival_id;
+    }
+
+    public int getRole_code() {
+        return role_code;
+    }
+
+    public void setRole_code(int role_code) {
+        this.role_code = role_code;
+    }
+
+    public int getDept_id() {
+        return dept_id;
+    }
+
+    public void setDept_id(int dept_id) {
+        this.dept_id = dept_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
+
+    public String getMobile_no() {
+        return mobile_no;
+    }
+
+    public void setMobile_no(String mobile_no) {
+        this.mobile_no = mobile_no;
+    }
+
+    public String getAadhar_no() {
+        return aadhar_no;
+    }
+
+    public void setAadhar_no(String aadhar_no) {
+        this.aadhar_no = aadhar_no;
+    }
+
+    public String getSl_no() {
+        return sl_no;
+    }
+
+    public void setSl_no(String sl_no) {
+        this.sl_no = sl_no;
+    }
+
+    public String getFrom_date() {
+        return from_date;
+    }
+
+    public void setFrom_date(String from_date) {
+        this.from_date = from_date;
+    }
+
+    public String getTo_date() {
+        return to_date;
+    }
+
+    public void setTo_date(String to_date) {
+        this.to_date = to_date;
+    }
 }

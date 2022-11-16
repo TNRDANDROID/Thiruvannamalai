@@ -40,9 +40,6 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private DashboardBinding dashboardBinding;
     private PrefManager prefManager;
 
-    TaxTypeListAdapter taxListAdapter;
-    ArrayList<PublicTax> taxTypeList;
-    ArrayList<PublicTax> transactionList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +49,19 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         dashboardBinding.setActivity(this);
         prefManager = new PrefManager(this);
 
+        dashboardBinding.name.setText(prefManager.getName());
+
+        if(prefManager.getKeyRoleCode().equals("2")){
+            dashboardBinding.detailsVerify.setVisibility(View.VISIBLE);
+            dashboardBinding.detailsEntry.setVisibility(View.VISIBLE);
+            dashboardBinding.detailsView.setVisibility(View.VISIBLE);
+        }
+        else {
+            dashboardBinding.detailsVerify.setVisibility(View.VISIBLE);
+            dashboardBinding.detailsEntry.setVisibility(View.GONE);
+            dashboardBinding.detailsView.setVisibility(View.GONE);
+        }
+
         dashboardBinding.detailsEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +70,22 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
             }
         });
-
+        dashboardBinding.detailsVerify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Dashboard.this,QRVerifivation.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+            }
+        });
+        dashboardBinding.detailsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Dashboard.this,ViewDetailsScreen.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in,R.anim.slide_out);
+            }
+        });
     }
 
     @Override

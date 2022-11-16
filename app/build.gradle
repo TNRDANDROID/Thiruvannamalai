@@ -45,7 +45,7 @@ android {
             signingConfig signingConfigs.debug
             resValue "string", "LOGIN_URL", "http://10.163.19.140:8080/tvm/project_main/webservices/login_service/login_services.php"
             resValue "string", "BASE_SERVICES_URL", "http://10.163.19.140:8080/vptax_new/project/webservices/open_services/open_services.php"
-            resValue "string", "APP_MAIN_SERVICES_URL", "http://10.163.19.140:8080/vptax_new/project/webservices_forms/village/nutri_garden/nutri_garden_services.php"
+            resValue "string", "APP_MAIN_SERVICES_URL", "http://10.163.19.140:8080/tvm/project_main/webservices/tvm_services.php"
             resValue "string", "TNRD_HOST_NAME", "10.163.19.140"
             resValue "string", "SUB_DOMAIN", "10.163.19.140"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -123,5 +123,8 @@ dependencies {
     implementation 'com.github.maayyaannkk:ImagePicker:1.0.13'
     //PDF viewer
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    ///  QR Scanner
+    implementation 'com.journeyapps:zxing-android-embedded:3.4.0'
 
 }

@@ -206,7 +206,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog,
                                             int whichButton) {
-                            offline_mode(username, password);
+                            //offline_mode(username, password);
                         }
                     });
             ab.show();
@@ -270,17 +270,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         String userDataDecrypt = Utils.decrypt(prefManager.getEncryptPass(), user_data);
                         Log.d("userdatadecry", "" + userDataDecrypt);
                         jsonObject = new JSONObject(userDataDecrypt);
-                     /*   prefManager.setDistrictCode(jsonObject.get(AppConstant.DISTRICT_CODE));
-                        prefManager.setBlockCode(jsonObject.get(AppConstant.BLOCK_CODE));
-                        prefManager.setPvCode(jsonObject.get(AppConstant.PV_CODE));
-                        prefManager.setDistrictName(jsonObject.get(AppConstant.DISTRICT_NAME));
-                        prefManager.setBlockName(jsonObject.get(AppConstant.BLOCK_NAME));
-                        prefManager.setDesignation(jsonObject.get(AppConstant.DESIG_NAME));
-                        prefManager.setName(String.valueOf(jsonObject.get(AppConstant.DESIG_NAME)));
-                        Log.d("userdata", "" + prefManager.getDistrictCode() + prefManager.getBlockCode() + prefManager.getPvCode() + prefManager.getDistrictName() + prefManager.getBlockName() + prefManager.getName());
+                        prefManager.setKeyLevel(jsonObject.getString("levels"));
+                        prefManager.setName(jsonObject.getString("name"));
+                        prefManager.setKeyDeptId(jsonObject.getString("dept_id"));
+                        prefManager.setKeyRoleCode(jsonObject.getString("role_code"));
+                        prefManager.setKeyRoleName(jsonObject.getString("role_name"));
                         prefManager.setUserPassKey(decryptedKey);
-                        //getVillageList();
-                        //getHabList();*/
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -296,107 +291,11 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                 }
 
             }
-            if ("VillageList".equals(urlType) && loginResponse != null) {
-                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
-                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
-                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
-                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
-                    new InsertVillageTask().execute(jsonObject);
-                }
-                Log.d("VillageList", "" + responseDecryptedBlockKey);
-            }
-            if ("HabitationList".equals(urlType) && loginResponse != null) {
-                String key = loginResponse.getString(AppConstant.ENCODE_DATA);
-                String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
-                JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
-                if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
-                    new InsertHabTask().execute(jsonObject);
-                }
-                Log.d("HabitationList", "" + responseDecryptedBlockKey);
-            }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
-    public class InsertVillageTask extends AsyncTask<JSONObject, Void, Void> {
-
-        @Override
-        protected Void doInBackground(JSONObject... params) {
-            dbData.open();
-            ArrayList<PublicTax> villagelist_count = dbData.getAll_Village(prefManager.getDistrictCode(),prefManager.getBlockCode());
-            if (villagelist_count.size() <= 0) {
-                if (params.length > 0) {
-                    JSONArray jsonArray = new JSONArray();
-                    try {
-                        jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        PublicTax villageListValue = new PublicTax();
-                        try {
-                            villageListValue.setDistictCode(jsonArray.getJSONObject(i).getString(AppConstant.DISTRICT_CODE));
-                            villageListValue.setBlockCode(jsonArray.getJSONObject(i).getString(AppConstant.BLOCK_CODE));
-                            villageListValue.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
-                            villageListValue.setPvName(jsonArray.getJSONObject(i).getString(AppConstant.PV_NAME));
-
-                            dbData.insertVillage(villageListValue);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }
-
-            }
-            return null;
-        }
-
-    }
-
-    public class InsertHabTask extends AsyncTask<JSONObject, Void, Void> {
-
-        @Override
-        protected Void doInBackground(JSONObject... params) {
-            dbData.open();
-            ArrayList<PublicTax> hablist_count = dbData.getAll_Habitation(prefManager.getDistrictCode(),prefManager.getBlockCode());
-            if (hablist_count.size() <= 0) {
-                if (params.length > 0) {
-                    JSONArray jsonArray = new JSONArray();
-                    try {
-                        jsonArray = params[0].getJSONArray(AppConstant.JSON_DATA);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        PublicTax habListValue = new PublicTax();
-                        try {
-                            habListValue.setDistictCode(jsonArray.getJSONObject(i).getString(AppConstant.DISTRICT_CODE));
-                            habListValue.setBlockCode(jsonArray.getJSONObject(i).getString(AppConstant.BLOCK_CODE));
-                            habListValue.setPvCode(jsonArray.getJSONObject(i).getString(AppConstant.PV_CODE));
-                            habListValue.setHabCode(jsonArray.getJSONObject(i).getString(AppConstant.HABB_CODE));
-                            habListValue.setHabitationName(jsonArray.getJSONObject(i).getString(AppConstant.HABITATION_NAME));
-
-                            dbData.insertHabitation(habListValue);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }
-
-            }
-            return null;
-
-
-        }
-    }
-
-
-
-
 
     @Override
     public void OnError(VolleyError volleyError) {
@@ -413,7 +312,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
     }
 
-    public void offline_mode(String name, String pass) {
+   /* public void offline_mode(String name, String pass) {
         String userName = prefManager.getUserName();
         String password = prefManager.getUserPassword();
         if (name.equals(userName) && pass.equals(password)) {
@@ -421,5 +320,5 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         } else {
             Utils.showAlert(this, "No data available for offline. Please Turn On Your Network");
         }
-    }
+    }*/
 }

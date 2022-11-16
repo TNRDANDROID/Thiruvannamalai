@@ -15,4 +15,8 @@
             shortEdges
         </item>
     </style>
+    <style name="dialog_animation_zoomInOut">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
+    </style>
 </resources>
