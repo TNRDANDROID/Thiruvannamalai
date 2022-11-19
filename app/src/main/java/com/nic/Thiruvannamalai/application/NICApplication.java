@@ -83,12 +83,13 @@ public class NICApplication extends Application {
 
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
-            if (BuildConfig.BUILD_TYPE.equalsIgnoreCase("production")) {
+           /* if (BuildConfig.BUILD_TYPE.equalsIgnoreCase("production")) {
                 mRequestQueue = Volley.newRequestQueue(this, new HurlStack(null, getSocketFactory())); //This for SSl Certificate
 
             } else {
                 mRequestQueue = Volley.newRequestQueue(getApplicationContext());
-            }
+            }*/
+            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return mRequestQueue;
     }

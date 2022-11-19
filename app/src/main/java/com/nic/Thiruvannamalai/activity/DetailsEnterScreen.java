@@ -3,6 +3,7 @@ package com.nic.Thiruvannamalai.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,7 +15,10 @@ import android.os.PersistableBundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -93,6 +97,13 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
             }
         });
 
+        registeredScreenBinding.backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
     }
     public void validate() {
@@ -100,31 +111,43 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
         if(!registeredScreenBinding.userName.getText().toString().equalsIgnoreCase("")){
             if(!registeredScreenBinding.age.getText().toString().equalsIgnoreCase("")){
                 if(!registeredScreenBinding.location.getText().toString().equalsIgnoreCase("")){
-                    if(!registeredScreenBinding.pinCode.getText().toString().equalsIgnoreCase("")){
-                        if(!registeredScreenBinding.phoneNumber.getText().toString().equalsIgnoreCase("")){
-                            if(!registeredScreenBinding.adharNumber.getText().toString().equalsIgnoreCase("")){
+                    if(!registeredScreenBinding.pinCode.getText().toString().equalsIgnoreCase("")&&(registeredScreenBinding.pinCode.getText().toString().length()==6)){
+                        if(!registeredScreenBinding.phoneNumber.getText().toString().equalsIgnoreCase("")&&(Utils.isValidMobile1(registeredScreenBinding.phoneNumber.getText().toString()))){
+                            if(!registeredScreenBinding.adharNumber.getText().toString().equalsIgnoreCase("")&&(registeredScreenBinding.adharNumber.getText().toString().length()==12)){
                                 if (registeredScreenBinding.imageView.getDrawable() != null) {
-                                    saveData();
+                                    save_and_delete_alert("save");
                                 }else {
                                     showAlert(this,"Please Capture Image");
                                 }
                             }else {
-                                showAlert(this,"Enter Adhar Number");
+                                registeredScreenBinding.adharNumber.requestFocus();
+                                registeredScreenBinding.adharNumber.setError("Enter valid Aadhar Number");
+                                //showAlert(this,"Enter valid Aadhar Number");
                             }
                         }else {
-                            showAlert(this,"Enter Phone Number");
+                            registeredScreenBinding.phoneNumber.requestFocus();
+                            registeredScreenBinding.phoneNumber.setError("Enter Valid Phone Number");
+                            //showAlert(this,"Enter Phone Number");
                         }
                     }else {
-                        showAlert(this,"Enter Pin Code");
+                        registeredScreenBinding.pinCode.requestFocus();
+                        registeredScreenBinding.pinCode.setError("Enter valid Pin Code");
+                        //showAlert(this,"Enter valid Pin Code");
                     }
                 }else {
-                    showAlert(this,"Enter Location");
+                    registeredScreenBinding.location.requestFocus();
+                    registeredScreenBinding.location.setError("Enter Location");
+                    //showAlert(this,"Enter Location");
                 }
             }else {
-                showAlert(this,"Enter Age");
+                registeredScreenBinding.age.requestFocus();
+                registeredScreenBinding.age.setError("Enter Age");
+                //showAlert(this,"Enter Age");
             }
         }else {
-            showAlert(this,"Enter User Name");
+            registeredScreenBinding.userName.requestFocus();
+            registeredScreenBinding.userName.setError("Enter User Name");
+            //showAlert(this,"Enter User Name");
         }
 
     }
@@ -292,6 +315,56 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
 
     @Override
     public void OnError(VolleyError volleyError) {
+
+    }
+
+    private void save_and_delete_alert(String save_delete){
+        try {
+            final Dialog dialog = new Dialog(DetailsEnterScreen.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.alert_dialog);
+
+            TextView text = (TextView) dialog.findViewById(R.id.tv_message);
+            if(save_delete.equals("save")) {
+                text.setText(getResources().getString(R.string.do_u_want_to_upload));
+            }
+            else if(save_delete.equals("delete")){
+                text.setText(getResources().getString(R.string.do_u_want_to_delete));
+            }
+            else if(save_delete.equals("dead_sapling_save")){
+                text.setText(getResources().getString(R.string.do_u_want_to_upload));
+            }
+
+            Button yesButton = (Button) dialog.findViewById(R.id.btn_ok);
+            Button noButton = (Button) dialog.findViewById(R.id.btn_cancel);
+            noButton.setVisibility(View.VISIBLE);
+            noButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            yesButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(save_delete.equals("save")) {
+                        saveData();
+                        dialog.dismiss();
+                    }
+                    else if(save_delete.equals("delete")) {
+                        dialog.dismiss();
+                    }
+                    else if(save_delete.equals("dead_sapling_save")){
+                        dialog.dismiss();
+                    }
+                }
+            });
+
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

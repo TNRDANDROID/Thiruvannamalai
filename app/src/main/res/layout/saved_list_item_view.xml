@@ -274,7 +274,7 @@
                             android:layout_alignParentEnd="true"
                             android:textColor="@color/cardview_dark_background"
                             android:textSize="@dimen/_14sdp"
-                            android:text="View Profile"
+                            android:text="View Photo"
                             android:textStyle="bold"
                             android:layout_gravity="end"
                             android:layout_marginEnd="@dimen/_10sdp"

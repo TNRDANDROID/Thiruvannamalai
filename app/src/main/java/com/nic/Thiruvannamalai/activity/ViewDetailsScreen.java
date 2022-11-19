@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
@@ -15,12 +16,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.volley.VolleyError;
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener;
 import com.nic.Thiruvannamalai.ImageZoom.ImageMatrixTouchHandler;
 import com.nic.Thiruvannamalai.R;
 import com.nic.Thiruvannamalai.adapter.SavedListViewAdapter;
@@ -59,12 +62,21 @@ public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerRe
         prefManager = new PrefManager(this);
 
 
+        binding.recyclerRl.setVisibility(View.VISIBLE);
+        binding.documentRl.setVisibility(View.GONE);
         if(Utils.isOnline()){
             viewData();
         }
         else {
             Utils.showAlert(ViewDetailsScreen.this,"No Internet");
         }
+
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void viewData() {
@@ -126,6 +138,37 @@ public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerRe
         return dataset;
     }
 
+    public void viewPdf(int tvm_deepa_festival_id) {
+        try {
+            new ApiService(this).makeJSONObjectRequest("viewPdf", Api.Method.POST, UrlGenerator.getAppMainService(), viewPdfJsonParams(tvm_deepa_festival_id), "not cache", this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public JSONObject viewPdfJsonParams(int tvm_deepa_festival_id) throws JSONException {
+        String authKey = Utils.encrypt(prefManager.getUserPassKey(), getResources().getString(R.string.init_vector), viewPdfParams(tvm_deepa_festival_id).toString());
+        JSONObject dataSet = new JSONObject();
+        dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
+        dataSet.put(AppConstant.DATA_CONTENT, authKey);
+        Log.d("viewPdf", "" + dataSet);
+        return dataSet;
+    }
+    public  JSONObject viewPdfParams(int tvm_deepa_festival_id) throws JSONException {
+        JSONObject dataset = new JSONObject();
+        try{
+            dataset.put(AppConstant.KEY_SERVICE_ID,"get_pdf");
+            dataset.put("tvm_deepa_festival_id",tvm_deepa_festival_id);
+        }
+        catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        Log.d("viewPdf", "" + dataset);
+        return dataset;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void OnMyResponse(ServerResponse serverResponse) {
         try {
@@ -157,6 +200,24 @@ public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerRe
                             String image_str = jsonArray.getJSONObject(i).getString("image");
                             ExpandedImage(image_str);
                         }
+                    }
+                    catch (JSONException e){
+
+                    }
+                }
+                Log.d("savedImage", "" + responseObj.toString());
+            }
+            if ("viewPdf".equals(urlType) && responseObj != null) {
+                //String key = responseObj.getString(AppConstant.ENCODE_DATA);
+                //String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
+                //JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
+                if (responseObj.getString("STATUS").equalsIgnoreCase("OK") && responseObj.getString("RESPONSE").equalsIgnoreCase("OK")) {
+
+                    try {
+                        JSONObject jsonObject1 = new JSONObject();
+                        jsonObject1 = responseObj.getJSONObject("JSON_DATA");
+                        String pdf_string =jsonObject1.getString("pdf_string");
+                        viewDocument(pdf_string);
                     }
                     catch (JSONException e){
 
@@ -291,5 +352,42 @@ public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerRe
         Bitmap bmp = BitmapFactory.decodeByteArray(byteArray1, 0,
                 byteArray1.length);/* w  w  w.ja va 2 s  .  c om*/
         return bmp;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void viewDocument(String documentString) {
+        if (documentString != null && !documentString.equals("")) {
+            binding.recyclerRl.setVisibility(View.GONE);
+            binding.documentRl.setVisibility(View.VISIBLE);
+            byte[] decodedString = new byte[0];
+            try {
+                //byte[] name = java.util.Base64.getEncoder().encode(fileString.getBytes());
+                decodedString = Base64.decode(documentString,Base64.DEFAULT);
+                binding.documentViewer.fromBytes(decodedString).load();
+               // System.out.println(new String(decodedString));
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+
+        }
+        else {
+            Utils.showAlert(this,"No Record");
+            binding.recyclerRl.setVisibility(View.VISIBLE);
+            binding.documentRl.setVisibility(View.GONE);
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(binding.documentRl.getVisibility()==View.VISIBLE){
+            binding.recyclerRl.setVisibility(View.VISIBLE);
+            binding.documentRl.setVisibility(View.GONE);
+        }
+        else {
+            super.onBackPressed();
+        }
     }
 }

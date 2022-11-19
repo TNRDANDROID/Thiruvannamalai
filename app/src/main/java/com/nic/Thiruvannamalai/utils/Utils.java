@@ -620,7 +620,48 @@ public class Utils {
         }
         return builder.toString();
     }
+    ////valid mobile number
+    public static boolean isValidMobile1(String phone2) {
+        boolean check= false;
+        boolean startDigitCheck = false;
+        boolean sameDigitCheck= false;
+        String[] startDigit=new String[] {"0","1","2","3","4","5"};
+        String[] sameDigit=new String[] {"6666666666","7777777777","8888888888","9999999999"};
+        for(int i=0;i<startDigit.length;i++){
+            if(phone2.startsWith(startDigit[i])){
+                startDigitCheck=false;
+                return false;
+            }else {
+                startDigitCheck=true;
+            }
+        }
 
+        if(startDigitCheck){
+            for(int i=0;i<sameDigit.length;i++){
+                if(phone2.equals(sameDigit[i])){
+                    sameDigitCheck=false;
+                    return false;
+                }else {
+                    sameDigitCheck=true;
+                }
+            }
+
+        }else {
+            return  false;
+        }
+        if(sameDigitCheck){
+            check = phone2.length() == 10;
+        }
+        else {
+            return  false;
+        }
+        if(check){
+            return check;
+        }else {
+            return  false;
+        }
+
+    }
 
     public static int minutesToSeconds(int minutes) {
         return minutes * SECONDS_IN_A_MINUTE;

@@ -58,6 +58,12 @@ public class SavedListViewAdapter extends RecyclerView.Adapter<SavedListViewAdap
                 ((ViewDetailsScreen)context).viewImage(savedList.get(position).getTvm_deepa_festival_id());
             }
         });
+        holder.savedListItemViewBinding.viewDocument.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ViewDetailsScreen)context).viewPdf(savedList.get(position).getTvm_deepa_festival_id());
+            }
+        });
 
     }
 

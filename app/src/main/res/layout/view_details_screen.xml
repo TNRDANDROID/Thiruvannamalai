@@ -31,7 +31,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/menu_icon"
+                        android:id="@+id/back_icon"
                         android:rotation="180"
                         android:src="@drawable/ic_arrow_forward_black_24dp"
                         android:layout_centerVertical="true"
@@ -62,46 +62,67 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:visibility="gone"
+                android:id="@+id/recycler_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/toll_bar"
-                android:layout_marginBottom="@dimen/_15sdp"
-                android:layout_above="@+id/wave_bg">
-
-                <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/toll_bar">
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/recycler"/>
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:layout_alignParentTop="true"
+                    android:layout_above="@+id/wave_bg">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:id="@+id/no_data_found"
-                    android:text="No Data Found"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/recycler"/>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:id="@+id/no_data_found"
+                        android:text="No Data Found"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/wave_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/ic_wave_1"
+                    >
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:padding="@dimen/_13sdp"
+                        android:text="@string/software_designed_amp_developed_by_nic"
+                        android:textAlignment="center"
+                        android:textColor="@color/cardview_dark_background"
+                        android:textSize="@dimen/_11sdp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
             </RelativeLayout>
             <RelativeLayout
-                android:id="@+id/wave_bg"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/ic_wave_1"
-                >
-                <TextView
-                    android:id="@+id/textView1"
+                android:layout_height="match_parent"
+                android:id="@+id/document_rl"
+                android:visibility="visible"
+                android:layout_below="@+id/toll_bar">
+
+                <com.github.barteksc.pdfviewer.PDFView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:padding="@dimen/_13sdp"
-                    android:text="@string/software_designed_amp_developed_by_nic"
-                    android:textAlignment="center"
-                    android:textColor="@color/cardview_dark_background"
-                    android:textSize="@dimen/_11sdp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:id="@+id/document_viewer"/>
 
             </RelativeLayout>
+
         </RelativeLayout>
 
     </RelativeLayout>

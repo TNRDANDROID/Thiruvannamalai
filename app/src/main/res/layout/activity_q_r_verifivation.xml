@@ -60,7 +60,19 @@
                         android:layout_alignParentRight="true" />
                 </RelativeLayout>
             </LinearLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/document_rl"
+                android:layout_below="@+id/toll_bar"
+                android:layout_above="@+id/wave_bg">
 
+                <com.github.barteksc.pdfviewer.PDFView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/document_viewer"/>
+
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/wave_bg"
                 android:layout_width="match_parent"
