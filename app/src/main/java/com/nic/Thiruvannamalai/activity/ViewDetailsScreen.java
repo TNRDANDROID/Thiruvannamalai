@@ -1,5 +1,6 @@
 package com.nic.Thiruvannamalai.activity;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,9 +13,11 @@ import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,7 +52,7 @@ public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerRe
     ViewDetailsScreenBinding binding;
     private PrefManager prefManager;
     SavedListViewAdapter savedListViewAdapter;
-
+    private SearchView searchView;
     ArrayList<PublicTax> viewList;
 
     @Override
@@ -60,7 +63,7 @@ public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerRe
 
         binding.setActivity(this);
         prefManager = new PrefManager(this);
-
+        setSupportActionBar(binding.tollBar);
 
         binding.recyclerRl.setVisibility(View.VISIBLE);
         binding.documentRl.setVisibility(View.GONE);
@@ -74,7 +77,7 @@ public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerRe
         binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onBackPressed();
             }
         });
     }
@@ -389,5 +392,36 @@ public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerRe
         else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+// Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+// listening to search query text change
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+// filter recycler view when query submitted
+                savedListViewAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+// filter recycler view when text is changed
+                savedListViewAdapter.getFilter().filter(query);
+                return false;
+            }
+        });
+        return true;
     }
 }

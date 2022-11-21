@@ -19,47 +19,59 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toll_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/toll_bar">
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/gradeint_background_new"
-                    android:layout_height="@dimen/_50sdp">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/back_icon"
-                        android:rotation="180"
-                        android:src="@drawable/ic_arrow_forward_black_24dp"
-                        android:layout_centerVertical="true"
-                        android:tint="@color/white"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_14sdp"
-                        android:text="Saved Details"
-                        android:textStyle="bold"/>
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/background"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-                    <ImageView
-                        android:visibility="gone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/log_out_icon"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_logout"
-                        android:layout_centerVertical="true"
-                        android:tint="@color/white"
-                        android:layout_marginEnd="@dimen/_15sdp"
-                        android:layout_alignParentRight="true" />
-                </RelativeLayout>
-            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:background="@drawable/gradeint_background_new"
+                        android:layout_height="@dimen/_50sdp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/back_icon"
+                            android:rotation="180"
+                            android:src="@drawable/ic_arrow_forward_black_24dp"
+                            android:layout_centerVertical="true"
+                            android:tint="@color/white"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp"
+                            android:text="Saved Details"
+                            android:textStyle="bold"/>
+
+                        <ImageView
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/log_out_icon"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_logout"
+                            android:layout_centerVertical="true"
+                            android:tint="@color/white"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_alignParentRight="true" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+            </androidx.appcompat.widget.Toolbar>
+
 
             <RelativeLayout
                 android:visibility="gone"
