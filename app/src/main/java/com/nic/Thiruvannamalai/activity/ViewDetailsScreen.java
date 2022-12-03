@@ -301,11 +301,13 @@ public class ViewDetailsScreen extends AppCompatActivity implements Api.ServerRe
             binding.recycler.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             if(viewList.size()>0){
                 binding.noDataFound.setVisibility(View.GONE);
+                binding.totalCount.setText("Total Count - "+viewList.size());
                 binding.recycler.setVisibility(View.VISIBLE);
                 savedListViewAdapter = new SavedListViewAdapter(viewList,ViewDetailsScreen.this);
                 binding.recycler.setAdapter(savedListViewAdapter);
             }
             else {
+                binding.totalCount.setText("Total Count - 0");
                 binding.noDataFound.setVisibility(View.VISIBLE);
                 binding.recycler.setVisibility(View.GONE);
                 binding.recycler.setAdapter(null);

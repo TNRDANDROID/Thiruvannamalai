@@ -49,6 +49,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
 
 import static com.nic.Thiruvannamalai.utils.CameraUtils.MEDIA_TYPE_IMAGE;
@@ -111,28 +112,25 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
         if(!registeredScreenBinding.userName.getText().toString().equalsIgnoreCase("")){
             if(!registeredScreenBinding.age.getText().toString().equalsIgnoreCase("")){
                 if(!registeredScreenBinding.location.getText().toString().equalsIgnoreCase("")){
-                    if(!registeredScreenBinding.pinCode.getText().toString().equalsIgnoreCase("")&&(registeredScreenBinding.pinCode.getText().toString().length()==6)){
-                        if(!registeredScreenBinding.phoneNumber.getText().toString().equalsIgnoreCase("")&&(Utils.isValidMobile1(registeredScreenBinding.phoneNumber.getText().toString()))){
-                            if(!registeredScreenBinding.adharNumber.getText().toString().equalsIgnoreCase("")&&(registeredScreenBinding.adharNumber.getText().toString().length()==12)){
-                                if (registeredScreenBinding.imageView.getDrawable() != null) {
-                                    save_and_delete_alert("save");
-                                }else {
-                                    showAlert(this,"Please Capture Image");
-                                }
-                            }else {
-                                registeredScreenBinding.adharNumber.requestFocus();
-                                registeredScreenBinding.adharNumber.setError("Enter valid Aadhar Number");
-                                //showAlert(this,"Enter valid Aadhar Number");
+                    if(!registeredScreenBinding.phoneNumber.getText().toString().equalsIgnoreCase("")&&(Utils.isValidMobile1(registeredScreenBinding.phoneNumber.getText().toString()))){
+                        if(!registeredScreenBinding.adharNumber.getText().toString().equalsIgnoreCase("")&&(registeredScreenBinding.adharNumber.getText().toString().length()==12)){
+                            if (registeredScreenBinding.imageView.getDrawable() != null) {
+                                save_and_delete_alert("save");
                             }
-                        }else {
-                            registeredScreenBinding.phoneNumber.requestFocus();
-                            registeredScreenBinding.phoneNumber.setError("Enter Valid Phone Number");
-                            //showAlert(this,"Enter Phone Number");
+                            else {
+                                showAlert(this,"Please Capture Image");
+                            }
                         }
-                    }else {
-                        registeredScreenBinding.pinCode.requestFocus();
-                        registeredScreenBinding.pinCode.setError("Enter valid Pin Code");
-                        //showAlert(this,"Enter valid Pin Code");
+                        else {
+                            registeredScreenBinding.adharNumber.requestFocus();
+                            registeredScreenBinding.adharNumber.setError("Enter valid Aadhar Number");
+                            //showAlert(this,"Enter valid Aadhar Number");
+                        }
+                    }
+                    else {
+                        registeredScreenBinding.phoneNumber.requestFocus();
+                        registeredScreenBinding.phoneNumber.setError("Enter Valid Phone Number");
+                        //showAlert(this,"Enter Phone Number");
                     }
                 }else {
                     registeredScreenBinding.location.requestFocus();
@@ -165,7 +163,7 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
         JSONObject dataSet = new JSONObject();
         dataSet.put(AppConstant.KEY_USER_NAME, prefManager.getUserName());
         dataSet.put(AppConstant.DATA_CONTENT, authKey);
-        Log.d("WorkListOptional", "" + dataSet);
+        Log.d("sav_params", "" + dataSet);
         return dataSet;
     }
     public  JSONObject saveParams() throws JSONException {
@@ -182,7 +180,7 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
             dataset1.put("name",registeredScreenBinding.userName.getText().toString());
             dataset1.put("age", registeredScreenBinding.age.getText().toString());
             dataset1.put("location",registeredScreenBinding.location.getText().toString());
-            dataset1.put("pincode",registeredScreenBinding.pinCode.getText().toString());
+            dataset1.put("pincode","");
             dataset1.put("mobile_no", registeredScreenBinding.phoneNumber.getText().toString());
             dataset1.put("aadhar_no", registeredScreenBinding.adharNumber.getText().toString());
             dataset1.put("image", image_str);
@@ -194,7 +192,7 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
             e.printStackTrace();
         }
 
-        Log.d("workListOptional", "" + dataset);
+        Log.d("save_params", "" + dataset);
         return dataset;
     }
 
@@ -264,12 +262,18 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
         // if the result is capturing Image
         super.onActivityResult(requestCode, resultCode, data);
          if(requestCode == 1213){
-            String filePath = data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH);
-            Bitmap rotatedBitmap = BitmapFactory.decodeFile(filePath);
+             if(resultCode==RESULT_OK){
+                 String filePath = data.getStringExtra(ImageSelectActivity.RESULT_FILE_PATH);
+                 Bitmap rotatedBitmap = BitmapFactory.decodeFile(filePath);
 
-             registeredScreenBinding.imageViewPreview.setVisibility(View.GONE);
-             registeredScreenBinding.imageView.setVisibility(View.VISIBLE);
-             registeredScreenBinding.imageView.setImageBitmap(rotatedBitmap);
+                 registeredScreenBinding.imageViewPreview.setVisibility(View.GONE);
+                 registeredScreenBinding.imageView.setVisibility(View.VISIBLE);
+                 registeredScreenBinding.imageView.setImageBitmap(rotatedBitmap);
+             }
+             else {
+                 Toasty.error(DetailsEnterScreen.this,"User Cancelled Image capture",Toasty.LENGTH_SHORT,true).show();
+             }
+
 
          }
 
@@ -288,7 +292,7 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
                 String responseDecryptedBlockKey = Utils.decrypt(prefManager.getUserPassKey(), key);
                 JSONObject jsonObject = new JSONObject(responseDecryptedBlockKey);
                 if (jsonObject.getString("STATUS").equalsIgnoreCase("OK") && jsonObject.getString("RESPONSE").equalsIgnoreCase("OK")) {
-                    showAlert(this, jsonObject.getString("MESSAGE"));
+                    tokenNumberShowAlert(jsonObject.getString("MESSAGE"),jsonObject.getString("TOKEN"));
                     registeredScreenBinding.userName.setText("");
                     registeredScreenBinding.age.setText("");
                     registeredScreenBinding.location.setText("");
@@ -367,4 +371,31 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
         }
 
     }
+
+    public  void tokenNumberShowAlert(String msg,String token_number){
+        try {
+            final Dialog dialog = new Dialog(DetailsEnterScreen.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.token_number_show_alert);
+
+            TextView text = (TextView) dialog.findViewById(R.id.tv_message);
+            TextView token_number_text = (TextView) dialog.findViewById(R.id.token_number);
+            text.setText(msg);
+            token_number_text.setText(token_number);
+
+            Button dialogButton = (Button) dialog.findViewById(R.id.btn_ok);
+            dialogButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            dialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

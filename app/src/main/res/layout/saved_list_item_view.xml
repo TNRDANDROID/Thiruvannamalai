@@ -15,15 +15,14 @@
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp">
 
-        <androidx.cardview.widget.CardView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_5sdp"
-            app:cardCornerRadius="10dp"
-            app:cardBackgroundColor="@color/cardview_shadow_end_color"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@drawable/corner_strong_rect_bg_color"
             >
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -303,7 +302,7 @@
 
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </RelativeLayout>
 
 
         <androidx.cardview.widget.CardView

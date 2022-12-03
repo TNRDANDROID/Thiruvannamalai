@@ -55,8 +55,23 @@ public class QRVerifivation extends AppCompatActivity implements Api.ServerRespo
             requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
         }
         else {
+            binding.documentRl.setVisibility(View.GONE);
             performQrCodeReader();
         }
+
+        binding.backIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+        binding.qrScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.documentRl.setVisibility(View.GONE);
+                performQrCodeReader();
+            }
+        });
     }
 
     public void performQrCodeReader(){
@@ -78,6 +93,7 @@ public class QRVerifivation extends AppCompatActivity implements Api.ServerRespo
         if (requestCode == MY_CAMERA_REQUEST_CODE) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 //                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                binding.documentRl.setVisibility(View.GONE);
                 performQrCodeReader();
             } else {
 //                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
@@ -185,11 +201,15 @@ public class QRVerifivation extends AppCompatActivity implements Api.ServerRespo
                         JSONObject jsonObject1 = new JSONObject();
                         jsonObject1 = responseObj.getJSONObject("JSON_DATA");
                         String pdf_string =jsonObject1.getString("pdf_string");
+                        binding.documentRl.setVisibility(View.VISIBLE);
                         viewDocument(pdf_string);
                     }
                     catch (JSONException e){
 
                     }
+                }
+                else {
+                    Utils.showAlert(QRVerifivation.this,responseObj.getString("MESSAGE"));
                 }
                 Log.d("savedImage", "" + responseObj.toString());
             }
@@ -206,6 +226,7 @@ public class QRVerifivation extends AppCompatActivity implements Api.ServerRespo
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void viewDocument(String documentString) {
         if (documentString != null && !documentString.equals("")) {
+            binding.documentViewer.setVisibility(View.VISIBLE);
             byte[] decodedString = new byte[0];
             try {
                 //byte[] name = java.util.Base64.getEncoder().encode(fileString.getBytes());
@@ -223,5 +244,10 @@ public class QRVerifivation extends AppCompatActivity implements Api.ServerRespo
             Utils.showAlert(this,"No Record");
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

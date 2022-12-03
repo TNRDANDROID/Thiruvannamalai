@@ -31,7 +31,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/menu_icon"
+                        android:id="@+id/back_icon"
                         android:rotation="180"
                         android:src="@drawable/ic_arrow_forward_black_24dp"
                         android:layout_centerVertical="true"
@@ -48,16 +48,14 @@
                         android:textStyle="bold"/>
 
                     <ImageView
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/log_out_icon"
+                        android:id="@+id/qr_scan"
                         android:layout_alignParentEnd="true"
-                        android:src="@drawable/ic_logout"
+                        android:src="@drawable/ic_qr_code_scanner_barcode_icon"
                         android:layout_centerVertical="true"
-                        android:tint="@color/white"
                         android:layout_marginEnd="@dimen/_15sdp"
-                        android:layout_alignParentRight="true" />
+                         />
                 </RelativeLayout>
             </LinearLayout>
             <RelativeLayout
