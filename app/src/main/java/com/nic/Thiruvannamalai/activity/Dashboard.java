@@ -52,14 +52,14 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         dashboardBinding.name.setText(prefManager.getName());
 
         if(prefManager.getKeyRoleCode().equals("2")){
-            dashboardBinding.detailsVerify.setVisibility(View.VISIBLE);
+            dashboardBinding.detailsVerify.setVisibility(View.GONE);
             dashboardBinding.detailsEntry.setVisibility(View.VISIBLE);
             dashboardBinding.detailsView.setVisibility(View.VISIBLE);
         }
         else {
             dashboardBinding.detailsVerify.setVisibility(View.VISIBLE);
             dashboardBinding.detailsEntry.setVisibility(View.GONE);
-            dashboardBinding.detailsView.setVisibility(View.GONE);
+            dashboardBinding.detailsView.setVisibility(View.VISIBLE);
         }
 
         dashboardBinding.detailsEntry.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +106,9 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     protected void onResume() {
         super.onResume();
 
+    }
+    public void logout() {
+        closeApplication();
     }
 
     public void closeApplication() {

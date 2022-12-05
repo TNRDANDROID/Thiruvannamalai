@@ -41,6 +41,7 @@ import com.nic.Thiruvannamalai.session.PrefManager;
 import com.nic.Thiruvannamalai.utils.CameraUtils;
 import com.nic.Thiruvannamalai.utils.UrlGenerator;
 import com.nic.Thiruvannamalai.utils.Utils;
+import com.nic.Thiruvannamalai.utils.VerhoeffAlgorithm;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +49,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import es.dmoral.toasty.Toasty;
 import in.mayanknagwanshi.imagepicker.ImageSelectActivity;
@@ -112,19 +114,17 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
         if(!registeredScreenBinding.userName.getText().toString().equalsIgnoreCase("")){
             if(!registeredScreenBinding.age.getText().toString().equalsIgnoreCase("")){
                 if(!registeredScreenBinding.location.getText().toString().equalsIgnoreCase("")){
-                    if(!registeredScreenBinding.phoneNumber.getText().toString().equalsIgnoreCase("")&&(Utils.isValidMobile1(registeredScreenBinding.phoneNumber.getText().toString()))){
-                        if(!registeredScreenBinding.adharNumber.getText().toString().equalsIgnoreCase("")&&(registeredScreenBinding.adharNumber.getText().toString().length()==12)){
+                    if(mobilValidation()){
+                        if(aadharValidation()){
                             if (registeredScreenBinding.imageView.getDrawable() != null) {
                                 save_and_delete_alert("save");
                             }
                             else {
                                 showAlert(this,"Please Capture Image");
                             }
-                        }
-                        else {
+                        }else {
                             registeredScreenBinding.adharNumber.requestFocus();
                             registeredScreenBinding.adharNumber.setError("Enter valid Aadhar Number");
-                            //showAlert(this,"Enter valid Aadhar Number");
                         }
                     }
                     else {
@@ -149,7 +149,61 @@ public class DetailsEnterScreen extends AppCompatActivity implements Api.ServerR
         }
 
     }
+/*
+    public void validateFields() {
+        if(mobilValidation()){
+            if(aadharValidation()){
+                if (registeredScreenBinding.imageView.getDrawable() != null) {
+                    save_and_delete_alert("save");
+                }
+                else {
+                    showAlert(this,"Please Capture Image");
+                }
+            }else {
+                registeredScreenBinding.adharNumber.requestFocus();
+                registeredScreenBinding.adharNumber.setError("Enter valid Aadhar Number");
+            }
+        }else {
+            registeredScreenBinding.phoneNumber.requestFocus();
+            registeredScreenBinding.phoneNumber.setError("Enter Valid Phone Number");
+        }
 
+    }
+*/
+    public boolean mobilValidation() {
+        boolean flag;
+            if(!registeredScreenBinding.phoneNumber.getText().toString().equalsIgnoreCase("")&&(Utils.isValidMobile1(registeredScreenBinding.phoneNumber.getText().toString()))){
+                flag=true;
+            }else {
+                flag=false;
+            }
+
+        return flag;
+    }
+    public boolean aadharValidation() {
+        boolean flag;
+        if(!registeredScreenBinding.adharNumber.getText().toString().isEmpty()){
+            if(!registeredScreenBinding.adharNumber.getText().toString().equalsIgnoreCase("")&&(registeredScreenBinding.adharNumber.getText().toString().length()==12)&&(validateAadhar(registeredScreenBinding.adharNumber.getText().toString()))){
+                flag=true;
+            }else {
+                flag=false;
+            }
+
+        }else {
+            flag=true;
+        }
+        return flag;
+    }
+
+    private boolean validateAadhar(String aadharNumber) {
+        Pattern aadharPattern = Pattern.compile("\\d{12}");
+        boolean isValidAadhar = aadharPattern.matcher(aadharNumber).matches();
+        if(isValidAadhar){
+            isValidAadhar = VerhoeffAlgorithm.validateVerhoeff(aadharNumber);
+        }
+        return isValidAadhar;
+
+    }
     private void saveData() {
         try {
             new ApiService(this).makeJSONObjectRequest("save", Api.Method.POST, UrlGenerator.getAppMainService(), saveJsonParams(), "not cache", this);

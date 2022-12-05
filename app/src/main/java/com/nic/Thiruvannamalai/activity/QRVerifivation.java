@@ -17,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,12 +39,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 import static com.nic.Thiruvannamalai.utils.Utils.showAlert;
 
 public class QRVerifivation extends AppCompatActivity implements Api.ServerResponseListener {
     private final int MY_CAMERA_REQUEST_CODE = 100;
     private PrefManager prefManager;
     ActivityQRVerifivationBinding binding;
+    String type="";
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +57,6 @@ public class QRVerifivation extends AppCompatActivity implements Api.ServerRespo
         binding = DataBindingUtil.setContentView(this,R.layout.activity_q_r_verifivation);
         binding.setActivity(QRVerifivation.this);
         prefManager = new PrefManager(this);
-        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
-        }
-        else {
-            binding.documentRl.setVisibility(View.GONE);
-            performQrCodeReader();
-        }
 
         binding.backIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +69,32 @@ public class QRVerifivation extends AppCompatActivity implements Api.ServerRespo
             public void onClick(View v) {
                 binding.documentRl.setVisibility(View.GONE);
                 performQrCodeReader();
+            }
+        });
+        binding.qrOnline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                type="online";
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                }
+                else {
+                    binding.documentRl.setVisibility(View.GONE);
+                    performQrCodeReader();
+                }
+            }
+        });
+        binding.qrOffline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                type="offline";
+                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+                }
+                else {
+                    binding.documentRl.setVisibility(View.GONE);
+                    performQrCodeReader();
+                }
             }
         });
     }
@@ -136,21 +161,118 @@ public class QRVerifivation extends AppCompatActivity implements Api.ServerRespo
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() == null) {
-                //Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
             }
             else {
                 //Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                if(Utils.isOnline()) {
-                    String value  = result.getContents();
-                    viewPdf(value);
-                }
-                else {
-                    Utils.showAlert(QRVerifivation.this,"No Internet");
-                }
+                validate(result.getContents());
+
             }
         } else {
             //super.onActivityResult(requestCode, resultCode, data);
         }
+
+    }
+
+    private void validate(String result) {
+        String value  = result;
+        if(value!= null && !value.isEmpty()){
+            byte[] data1 = Base64.decode(value, Base64.DEFAULT);
+            String text = new String(data1, StandardCharsets.UTF_8);
+            if(text!= null && !text.isEmpty()){
+                String[] separated = text.split("-");
+                if(separated.length == 6){
+                    String id=separated[0];
+                    String user_name=separated[1];
+                    String user_age=separated[2];
+                    String user_mobile_no=separated[3];
+                    String user_aadhar_no=separated[4];
+                    String festival_id=separated[5];
+                    if(id!= null && !id.isEmpty()){
+                        if(user_name!= null && !user_name.isEmpty()){
+                            if(user_age!= null && !user_age.isEmpty()){
+                                if(user_mobile_no!= null && !user_mobile_no.isEmpty()){
+                                    if(festival_id!= null && !festival_id.isEmpty()){
+                                        if(type.equalsIgnoreCase("online")){
+                                            viewPdf(festival_id);
+                                        }else {
+                                            details_alert(value);
+                                        }
+                                    }else {
+                                        Utils.showAlert(this, "Invalid Argument");
+                                    }
+                                }else {
+                                    Utils.showAlert(this, "Invalid Argument");
+                                }
+                            }else {
+                                Utils.showAlert(this, "Invalid Argument");
+                            }
+                        }else {
+                            Utils.showAlert(this, "Invalid Argument");
+                        }
+                    }else {
+                        Utils.showAlert(this, "Invalid Argument");
+                    }
+                }else {
+                    Utils.showAlert(this, "Invalid Argument");
+                }
+
+            }else {
+                Utils.showAlert(this, "Invalid Argument");
+            }
+        }else {
+            Utils.showAlert(this, "Invalid Argument");
+        }
+
+    }
+
+
+    private void details_alert(String value){
+        final Dialog dialog = new Dialog(QRVerifivation.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.profile_alert_dialog);
+
+        TextView tvm_deepa_festival_id = (TextView) dialog.findViewById(R.id.tvm_deepa_festival_id);
+        TextView name = (TextView) dialog.findViewById(R.id.name);
+        TextView age = (TextView) dialog.findViewById(R.id.age);
+        TextView mobile_no = (TextView) dialog.findViewById(R.id.mobile_no);
+        TextView aadhar_no = (TextView) dialog.findViewById(R.id.aadhar_no);
+        TextView ok = (TextView) dialog.findViewById(R.id.ok);
+        CircleImageView profile_image = (CircleImageView) dialog.findViewById(R.id.profile_image);
+
+        if(value!= null){
+            byte[] data1 = Base64.decode(value, Base64.DEFAULT);
+            String text = new String(data1, StandardCharsets.UTF_8);
+
+            String[] separated = text.split("-");
+            String id=separated[0];
+            String user_name=separated[1];
+            String user_age=separated[2];
+            String user_mobile_no=separated[3];
+            String user_aadhar_no=separated[4];
+            System.out.println("Result text >>"+id+name+age+mobile_no+aadhar_no);
+            tvm_deepa_festival_id.setText("Token No : "+id);
+            name.setText("Name : "+user_name);
+            age.setText("Age : "+user_age);
+            mobile_no.setText("Mobile No : "+user_mobile_no);
+            aadhar_no.setText("Aadhar No : "+user_aadhar_no);
+        }
+
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+        layoutParams.copyFrom(dialog.getWindow().getAttributes());
+        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
+        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
+        dialog.getWindow().setAttributes(layoutParams);
+        dialog.getWindow().setBackgroundDrawableResource(R.color.full_transparent);
+        dialog.show();
 
     }
 

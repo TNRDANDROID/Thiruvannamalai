@@ -45,7 +45,8 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name="com.nic.Thiruvannamalai.activity.SplashScreen">
+        <activity android:name=".activity.SplashScreen"
+            android:exported="true">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -60,22 +61,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.nic.Thiruvannamalai.activity.LoginScreen"
+            android:name=".activity.LoginScreen"
+            android:exported="true"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity
-            android:name="com.nic.Thiruvannamalai.activity.AppUpdateDialog"
+            android:name=".activity.AppUpdateDialog"
+            android:exported="true"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateUnchanged|adjustPan" />
-        <activity android:name="com.nic.Thiruvannamalai.activity.Dashboard" />
-        <activity android:name=".activity.DetailsEnterScreen" />
-        <activity android:name=".activity.ViewDetailsScreen" />
-        <activity android:name=".activity.QRVerifivation"></activity>
+        <activity android:name=".activity.Dashboard"
+            android:exported="true"/>
+        <activity android:name=".activity.DetailsEnterScreen"
+            android:exported="true"/>
+        <activity android:name=".activity.ViewDetailsScreen"
+            android:exported="true"/>
+        <activity android:name=".activity.QRVerifivation"
+            android:exported="true"/>
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
+            android:exported="true"
             tools:replace="screenOrientation" />
         <provider
             android:name="androidx.core.content.FileProvider"
